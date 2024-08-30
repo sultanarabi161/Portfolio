@@ -1,132 +1,99 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPTV Player</title>
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+    <meta name="description" content="Peace TV Bangla - An Islamic TV channel broadcasting religious and educational content in Bengali.">
+    <title>Custom Controls with Plyr.io Video Player</title>
+    <link rel='stylesheet' href='https://cdn.plyr.io/3.5.6/plyr.css'>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            margin: 20px;
+            background-color: #f9f9f9;
             color: #333;
-            margin: 0;
-            padding: 20px;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        h1, h2, h3 {
+            color: #0044cc;
         }
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
+
+        .channel-description {
+            margin: 20px 0;
         }
-        .footer a {
-            color: #007BFF;
+
+        .separator img {
+            max-width: 100%;
+            height: auto;
         }
+
         .channel-list {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
         }
-        .channel-list li:hover {
-            background-color: #f0f0f0;
+
+        .channel-list li {
+            margin: 10px 0;
+        }
+
+        .channel-list a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .channel-list a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
+    <h1>Peace TV Bangla</h1>
+    <div class="channel-description">
+        <p>Peace TV Bangla is an Islamic television channel that broadcasts religious and educational content in the Bengali language...</p>
+    </div>
+    <video id="player" controls crossorigin playsinline class="js-player"
+           poster="https://th.bing.com/th/id/R.e3178dc9899e213464f79fc12802315f?rik=4sH1hAKHqq%2bQXg&pid=ImgRaw&r=0"></video>
 
-    <div class="container">
-        <h1>IPTV Player</h1>
-        <video controls crossorigin playsinline class="js-player">
-            <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
-        </video>
+    <h2>Other Channels</h2>
+    <ul class="channel-list">
+        <li><a href="#" onclick="loadChannel('https://utube.buddyxiptv.com/@JamunaTVbd.m3u8')">Channel 1</a></li>
+        <li><a href="#" onclick="loadChannel('https://utube.buddyxiptv.com/@somoynews360.m3u8')">Channel 2</a></li>
+        <li><a href="#" onclick="loadChannel('https://example.com/channel3.m3u8')">Channel 3</a></li>
+        <li><a href="#" onclick="loadChannel('https://example.com/channel4.m3u8')">Channel 4</a></li>
+    </ul>
 
-        <br>
-        <div id="menu">
-            <a href="#" onclick="loadServer('https://raw.githubusercontent.com/sultanarabi161/bd-playlist-v.1.08/iptv/bd-playlist.m3u')">বাংলাদেশ</a>
-        </div>
-        <br>
-        <input type="text" id="searchInput" placeholder="চ্যানেল খুঁজুন">
-        <div id="categories"></div>
-        <ul id="channelList" class="channel-list"></ul>
+    <div class="separator" style="clear: both;">
+        <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUHf8UTjB9rtfErzcRMoAicNTF5j12UtQKxcvw6SHyzgaIpBtKlvW2yhac3LSTgSXHfVdVhDRl8Y6AT2-HNxDZME3F0MjBVje63H7ITZ2AW-BiWKvSzyXPReA8W9UG0KbAn8rXULxQUFI2BN9nuZlkAZFOtFsD_Ac6mnLuuqt9QGH_e2k2jaAHsB59Cjo/s1280/maxresdefault_live.jpg" style="display: block; padding: 1em 0; text-align: center;">
+            <img alt="Peace TV Bangla Live" border="0" width="320"
+                 src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUHf8UTjB9rtfErzcRMoAicNTF5j12UtQKxcvw6SHyzgaIpBtKlvW2yhac3LSTgSXHfVdVhDRl8Y6AT2-HNxDZME3F0MjBVje63H7ITZ2AW-BiWKvSzyXPReA8W9UG0KbAn8rXULxQUFI2BN9nuZlkAZFOtFsD_Ac6mnLuuqt9QGH_e2k2jaAHsB59Cjo/s320/maxresdefault_live.jpg"/>
+        </a>
     </div>
 
-    <footer class="footer">
-        <div class="social-icons">
-            <a href="https://www.facebook.com/muhammadsultanarabi" target="_blank">ফেসবুক</a> |
-            <a href="https://www.twitter.com/sultanarabi161" target="_blank">এক্স</a> |
-            <a href="https://www.instagram.com/muhammadsultanarabi161" target="_blank">ইনস্টাগ্রাম</a>
-        </div>
-        <div class="developer-info">
-            <p>ডেভেলপার: সুলতান আরবি (জহিরুল ইসলাম)</p>
-            <p>ইমেল: sultanarabi161@gmail.com</p>
-            <p>ওয়েবসাইট: <a href="https://sultanarabi.news.blog" target="_blank" style="color: white;">sultanarabi.news.blog</a></p>
-            <p>&copy; 2024 IBN TV. সব অধিকার সংরক্ষিত।</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
+    <script src='https://cdn.plyr.io/3.5.6/plyr.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
-        const player = new Plyr('.js-player');
+        const player = new Plyr('#player');
 
-        // Function to load the server and display channels
-        function loadServer(url) {
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    const channels = parseM3U(data);
-                    displayChannels(channels);
-                })
-                .catch(error => console.error('Error loading M3U:', error));
-        }
-
-        // Function to parse M3U data
-        function parseM3U(data) {
-            const lines = data.split('\n');
-            const channels = [];
-            for (let i = 0; i < lines.length; i++) {
-                if (lines[i].startsWith('#EXTINF:')) {
-                    const channelName = lines[i].substring(lines[i].indexOf(',') + 1).trim();
-                    const channelUrl = lines[i + 1].trim();
-                    channels.push({ name: channelName, url: channelUrl });
-                }
+        function loadChannel(url) {
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(document.getElementById('player'));
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    player.play();
+                });
+            } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+                player.src = url;
             }
-            return channels;
         }
 
-        // Function to display channels in the channel list
-        function displayChannels(channels) {
-            const channelList = document.getElementById('channelList');
-            channelList.innerHTML = ''; // Clear previous channels
-
-            channels.forEach(channel => {
-                const li = document.createElement('li');
-                li.textContent = channel.name;
-                li.onclick = () => playChannel(channel.url);
-                channelList.appendChild(li);
-            });
-        }
-
-        // Function to play a selected channel
-        function playChannel(url) {
-            player.source = {
-                type: 'video',
-                sources: [{
-                    src: url,
-                    type: 'application/x-mpegURL'
-                }]
-            };
-        }
-
-        // Load Bangladesh channels by default when the page loads
         document.addEventListener('DOMContentLoaded', () => {
-            loadServer('https://raw.githubusercontent.com/sultanarabi161/bd-playlist-v.1.08/iptv/bd-playlist.m3u');
+            // Optionally load the initial channel
+            loadChannel('https://dzkyvlfyge.erbvr.com/PeaceTvUrdu/tracks-v3a1/mono.m3u8');
         });
     </script>
 </body>
+
 </html>
