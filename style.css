@@ -1,118 +1,102 @@
 body {
-            font-family: Arial, sans-serif;
-            background-color: #0d0c2b;
-            margin: 0;
-            padding: 0;
-            color: white;
-            border-style: 2px solid black;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 10px;
-            
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        .back-btn {
-            background-color: #2e3049;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 24px;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-        }
-
-        .channel-categories {
-            display: flex;
-            justify-content: flex-start;
-            overflow-x: auto;
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #1e1e40;
-            border-radius: 20px;
-            scrollbar-width: thin; /* Firefox */
-        }
-
-        .channel-categories::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .channel-categories::-webkit-scrollbar-thumb {
-            background-color: #4a4a8e;
-            border-radius: 10px;
-        }
-
-        .category {
-            margin: 0 10px;
-            padding: 10px 20px;
-            background-color: #2e3049;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .category:hover {
-            background-color: red;
-            transform: scale(1.1);
-        }
-
-.channel-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    overflow-y: auto;
-    max-height: 340px; /* উচ্চতা বাড়ানো হয়েছে */
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
-        .channel img {
-            width: 100%;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #1e1e1e;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    position: relative;
+}
 
-        .channel img:hover {
-            transform: scale(1.1);
-            
-        }
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
-        .channel {
-            opacity: 0;
-            animation: fadeIn 0.5s forwards;
-        }
-        
-        .footer {
-         background-color: #1e1e40;
-         padding: 10px 0;
-         color: white;
-         text-align: center;
-         border-top: 2px solid #444;
-    
-        }
-        a{
-          
-          color: red;
-        }
+input[type="text"], #searchInput {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    margin-bottom: 10px;
+}
 
+button {
+    padding: 10px;
+    background-color: #6200ea;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
+button:hover {
+    background-color: #3700b3;
+}
 
+#videoPlayer {
+    width: 100%;
+    height: 300px;
+    margin: 20px 0;
+    background-color: #000;
+    border-radius: 8px;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+.channel-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.channel {
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.channel:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: #444;
+}
+
+.channel img {
+    width: 100%;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.channel p {
+    margin: 10px 0 0;
+    font-size: 16px;
+    color: #ddd;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: #fff;
+}
