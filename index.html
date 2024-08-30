@@ -1,109 +1,345 @@
-<!DOCTYPE html>
+<!-- Include this in the <head> section of your Blogger template -->
+<link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css">
+<style>
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
 
-<html lang="en">
+h1 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+    font-size: 2rem;
+}
 
-<head>
+#menu {
+    background-color: #6c757d;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    border-style: solid;
+    border-radius: 10px;
+    z-index: 1000; /* স্লাইডারের উপর মেনু টপে দেখানোর জন্য */
+    position: relative;
+}
 
-  <meta charset="UTF-8">
+#menu a {
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+    background-color: #007bff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+}
 
-  <title>Custom Controls with Plyr.io Video Player</title>
+#menu a:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
 
-  <link rel='stylesheet' href='https://cdn.plyr.io/3.5.6/plyr.css'>
+.container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto; /* কেন্দ্রাভিমুখী করা */
+    text-align: center; /* কেন্দ্রাভিমুখী করা */
+}
 
-</head>
+#searchInput {
+    width: 94%;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    display: block;
+}
 
-<body>
+#categories {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
-<video id="player" controls crossorigin playsinline class="js-player" 
+.category {
+    font-weight: bold;
+    padding: 8px 15px;
+    background-color: #17a2b8;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
 
-       poster="https://th.bing.com/th/id/R.e3178dc9899e213464f79fc12802315f?rik=4sH1hAKHqq%2bQXg&pid=ImgRaw&r=0">
+.category:hover {
+    background-color: #138496;
+    transform: translateY(-2px);
+}
 
-  <!-- HLS ভিডিও ফাইল -->
+.channel-list {
+    list-style-type: none;
+    padding: 0;
+    height: 400px;
+    overflow-y: scroll;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-</video>
+.channel-item {
+    padding: 10px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    border-bottom: 1px solid #eee;
+    border-radius: 5px;
+}
 
-<script src='https://cdn.plyr.io/3.5.6/plyr.js'></script>
+.channel-item:hover {
+    background-color: #f1f1f1;
+    transform: translateY(-2px);
+}
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+.channel-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+video {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+    border: 8px solid #333;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.footer {
+    background-color: mediumaquamarine;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    border-style: dashed;
+    border-top: darkred;
+    border-radius: 2pc;
+}
+
+.footer .social-icons {
+    margin: 10px 0;
+}
+
+.footer .social-icons a {
+    color: darkred;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer .social-icons a:hover {
+    color: #ddd;
+}
+
+.footer .developer-info {
+    margin: 10px 0;
+}
+
+/* মোবাইল ডিভাইসের জন্য বিশেষ স্টাইল */
+@media screen and (max-width: 768px) {
+    #menu {
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    #menu a {
+        padding: 8px 10px;
+        margin: 3px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .channel-item {
+        padding: 8px;
+    }
+
+    .channel-item img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    video {
+        border-radius: 10px;
+    }
+
+    #searchInput {
+        width: 90%;
+        padding: 10px;
+    }
+}
+</style>
+
+<!-- Include this in the <body> or wherever you want to display your tool -->
+<div class="container">
+    <h1></h1>
+    <video controls crossorigin playsinline class="js-player">
+        <!-- Default video source -->
+        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
+    </video>
+
+    <br><br>
+    <div id="menu">
+        
+
+        <a href="#" onclick="loadServer('https://raw.githubusercontent.com/sultanarabi161/bd-playlist-v.1.08/iptv/bd-playlist.m3u')">Bangladesh</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/local.m3u')">Local</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/other.m3u')">Others</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/other.m3u')">All</a>
+        
+        
+    </div>
+    <br>
+    <input type="text" id="searchInput" placeholder="Search channels">
+    <div id="categories"></div>
+    <ul id="channelList" class="channel-list"></ul>
+</div>
+
+  <footer class="footer">
+    <div class="social-icons">
+      <a href="https://www.facebook.com/muhammadsultanarabi" target="_blank">Facebook</a> |
+      <a href="https://www.twitter.com/sultanarabi161" target="_blank">X</a> |
+      <a href="https://www.instagram.com/muhammadsultanarabi161" target="_blank">Instagram</a>
+    </div>
+    <div class="developer-info">
+      <p>Developed by: Sultan Arabi (Johirul islam)</p>
+      <p>Email: sultanarabi161@gmail.com</p>
+      <p>Website: <a href="https://sultanarabi.news.blog" target="_blank"
+          style="color: white;">sultanarabi.news.blog</a></p>
+      <p>&copy; 2024 IBN TV. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+
+<!-- Include this just before the closing </body> tag -->
+<script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
 <script>
-
     document.addEventListener('DOMContentLoaded', () => {
-
         const controls = [
-
-            'play-large', // The large play button in the center
-
-            'restart', // Restart playback
-
-            'rewind', // Rewind by the seek time (default 10 seconds)
-
-            'play', // Play/pause playback
-
-            'fast-forward', // Fast forward by the seek time (default 10 seconds)
-
-            'progress', // The progress bar and scrubber for playback and buffering
-
-            'current-time', // The current time of playback
-
-            'duration', // The full duration of the media
-
-            'mute', // Toggle mute
-
-            'volume', // Volume control
-
-            'captions', // Toggle captions
-
-            'settings', // Settings menu
-
-            'pip', // Picture-in-picture (currently Safari only)
-
-            'airplay', // Airplay (currently Safari only)
-
-           
-
-            'fullscreen' // Toggle fullscreen
-
+            'play-large',      // The large play button in the center
+            'restart',         // Restart playback
+            'rewind',          // Rewind by the seek time (default 10 seconds)
+            'play',            // Play/pause playback
+            'fast-forward',    // Fast forward by the seek time (default 10 seconds)
+            'progress',        // The progress bar and scrubber for playback and buffering
+            'current-time',    // The current time of playback
+            'duration',        // The full duration of the media
+            'mute',            // Toggle mute
+            'volume',          // Volume control
+            'captions',        // Toggle captions
+            'settings',        // Settings menu
+            'pip',             // Picture-in-picture (currently Safari only)
+            'airplay',         // Airplay (currently Safari only)
+            'fullscreen'       // Toggle fullscreen
         ];
 
-        const player = new Plyr('#player', { controls });
+        const player = Plyr.setup('.js-player', { controls });
 
-        if (Hls.isSupported()) {
-
-            const hls = new Hls();
-
-            hls.loadSource('https://dzkyvlfyge.erbvr.com/PeaceTvUrdu/tracks-v3a1/mono.m3u8');
-
-            hls.attachMedia(document.getElementById('player'));
-
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-
-              player.play();
-
-            });
-
-        } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
-
-            player.src = 'https://dzkyvlfyge.erbvr.com/PeaceTvUrdu/tracks-v3a1/mono.m3u8';
-
+        // Function to play channel
+        function playChannel(url) {
+            player[0].source = {
+                type: 'video',
+                sources: [
+                    {
+                        src: url,
+                        type: 'video/mp4',
+                    }
+                ],
+            };
+            player[0].play();
         }
+        
+        // Override the playChannel function with Plyr's player
+        window.playChannel = playChannel;
 
+        // Initialize the default server
+        loadServer('https://iptv-org.github.io/iptv/categories/news.m3u');
     });
 
+    async function fetchChannels(url) {
+        const response = await fetch(url);
+        const data = await response.text();
+        return data;
+    }
+
+    function parseM3U(data) {
+        const channels = [];
+        const lines = data.split('\n');
+
+        lines.forEach((line, index) => {
+            if (line.startsWith('#EXTINF:')) {
+                const info = line.split(',');
+                const [name, category, logo] = info[1].split(';');
+                const url = lines[index + 1];
+                channels.push({ name, category, logo, url });
+            }
+        });
+
+        return channels;
+    }
+
+    function displayChannels(channels) {
+        const channelList = document.getElementById('channelList');
+        channelList.innerHTML = '';
+
+        channels.forEach(channel => {
+            const listItem = document.createElement('li');
+            listItem.className = 'channel-item';
+            listItem.innerHTML = `
+                <img src="${channel.logo || 'https://via.placeholder.com/50'}" alt="${channel.name}">
+                <span>${channel.name}</span>
+            `;
+            listItem.onclick = () => playChannel(channel.url);
+            channelList.appendChild(listItem);
+        });
+    }
+
+    function filterChannels(channels, query) {
+        return channels.filter(channel =>
+            channel.name.toLowerCase().includes(query.toLowerCase())
+        );
+    }
+
+    async function loadServer(url) {
+        const data = await fetchChannels(url);
+        const channels = parseM3U(data);
+        displayChannels(channels);
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.oninput = () => {
+            const filteredChannels = filterChannels(channels, searchInput.value);
+            displayChannels(filteredChannels);
+        };
+    }
 </script>
 
-</body>
 
-</html>
-
-
-<hr>
-
-<b><b><b><br><br><br>
-
-
-
-<b>Peace TV Bangla</b> is an Islamic television channel that broadcasts religious and educational content in the Bengali language. As part of the Peace TV network, the channel is dedicated to spreading the teachings of Islam, promoting peace, and fostering understanding among viewers. Peace TV Bangla offers a variety of programs, including Quranic recitations, lectures by renowned Islamic scholars, talk shows, and educational series aimed at deepening the understanding of Islamic principles. The channel also addresses social issues from an Islamic perspective and provides guidance on living a life in accordance with Islamic values. Peace TV Bangla is watched by millions of Bengali-speaking Muslims around the world and is known for its commitment to promoting positive values and peaceful coexistence.
-  
-  
-  <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUHf8UTjB9rtfErzcRMoAicNTF5j12UtQKxcvw6SHyzgaIpBtKlvW2yhac3LSTgSXHfVdVhDRl8Y6AT2-HNxDZME3F0MjBVje63H7ITZ2AW-BiWKvSzyXPReA8W9UG0KbAn8rXULxQUFI2BN9nuZlkAZFOtFsD_Ac6mnLuuqt9QGH_e2k2jaAHsB59Cjo/s1280/maxresdefault_live.jpg" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" width="320" data-original-height="720" data-original-width="1280" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUHf8UTjB9rtfErzcRMoAicNTF5j12UtQKxcvw6SHyzgaIpBtKlvW2yhac3LSTgSXHfVdVhDRl8Y6AT2-HNxDZME3F0MjBVje63H7ITZ2AW-BiWKvSzyXPReA8W9UG0KbAn8rXULxQUFI2BN9nuZlkAZFOtFsD_Ac6mnLuuqt9QGH_e2k2jaAHsB59Cjo/s320/maxresdefault_live.jpg"/></a></div>
