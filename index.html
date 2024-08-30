@@ -1,489 +1,352 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>IPTV Channel List with Plyr.io Video Player</title>
-  <link rel='stylesheet' href='https://cdn.plyr.io/3.5.6/plyr.css'>
-  <style>
+<!-- Include this in the <head> section of your Blogger template -->
+<link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css">
+<style>
     body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
-      background-color: #f4f4f4;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .video-container {
-      width: 100%;
-      max-width: 1000px;
-      height: 0;
-      padding-bottom: 56.26%; /* 16:9 Aspect Ratio */
-      background-color: black;
-      border: 8px solid #333; /* TV frame effect */
-      border-radius: 2px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Deeper shadow for TV effect */
-      margin: 10px 0;
-    }
-
-    .channel-box {
-
-  width: 100%;
-
-  max-width: 1000px;
-
-  height: calc(100vh - 220px); /* Reduce to make room for more sections */
-
-  background-color: white;
-
-  border: 2px solid #333;
-
-  border-radius: 5px;
-
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
-  overflow-y: auto;
-
-  padding: 10px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  box-sizing: border-box;
-
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
 }
 
+h1 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+    font-size: 2rem;
+}
 
+#menu {
+    background-color: #6c757d;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    border-style: solid;
+    border-radius: 10px;
+    z-index: 1000; /* স্লাইডারের উপর মেনু টপে দেখানোর জন্য */
+    position: relative;
+}
 
-    .content-section {
-      padding: 10px 0;
+#menu a {
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+    background-color: #007bff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+}
+
+#menu a:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+.container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto; /* কেন্দ্রাভিমুখী করা */
+    text-align: center; /* কেন্দ্রাভিমুখী করা */
+}
+
+#searchInput {
+    width: 94%;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    display: block;
+}
+
+#categories {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category {
+    font-weight: bold;
+    padding: 8px 15px;
+    background-color: #17a2b8;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.category:hover {
+    background-color: #138496;
+    transform: translateY(-2px);
+}
+
+.channel-list {
+    list-style-type: none;
+    padding: 0;
+    height: 400px;
+    overflow-y: scroll;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.channel-item {
+    padding: 10px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    border-bottom: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.channel-item:hover {
+    background-color: #f1f1f1;
+    transform: translateY(-2px);
+}
+
+.channel-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+video {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+    border: 8px solid #333;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.footer {
+    background-color: mediumaquamarine;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    border-style: dashed;
+    border-top: darkred;
+    border-radius: 2pc;
+}
+
+.footer .social-icons {
+    margin: 10px 0;
+}
+
+.footer .social-icons a {
+    color: darkred;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer .social-icons a:hover {
+    color: #ddd;
+}
+
+.footer .developer-info {
+    margin: 10px 0;
+}
+
+/* মোবাইল ডিভাইসের জন্য বিশেষ স্টাইল */
+@media screen and (max-width: 768px) {
+    #menu {
+        flex-direction: column;
+        padding: 5px;
     }
 
-    .channel-list, .sports-list, .sports-score-list, .fm-radio-list {
-      display: flex;
-      flex-direction: column;
+    #menu a {
+        padding: 8px 10px;
+        margin: 3px;
     }
 
-    .item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      cursor: pointer;
-      border-radius: 0.5pc;
+    .container {
+        padding: 10px;
     }
 
-    .item img {
-      width: 50px;
-      height: 50px;
-      margin-right: 10px;
-    }
-    
-    .footer {
-      background-color: mediumaquamarine;
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-      border-style: solid;
-      border-top: darkred;
-      border-radius: 2pc;
-      margin-top: 10px;
+    .channel-item {
+        padding: 8px;
     }
 
-    .footer .social-icons {
-      margin: 10px 0;
+    .channel-item img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
     }
 
-    .footer .social-icons a {
-      color: darkred;
-      margin: 0 10px;
-      text-decoration: none;
+    video {
+        border-radius: 10px;
     }
 
-    .footer .social-icons a:hover {
-      color: #ddd;
+    #searchInput {
+        width: 90%;
+        padding: 10px;
     }
+}
+</style>
 
-    .footer .developer-info {
-      margin: 10px 0;
-    }
+<!-- Include this in the <body> or wherever you want to display your tool -->
+<div class="container">
+    <h1></h1>
+    <video controls crossorigin playsinline class="js-player">
+        <!-- Default video source -->
+        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
+    </video>
 
-    h2 {
-      color: red;
-    }
+    <br><br>
+    <div id="menu">
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/news.m3u')">News</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/sports.m3u')">Sports</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/entertainment.m3u')">Entertainment</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/kids.m3u')">Kids</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/religious.m3u')">Islamic</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/education.m3u')">Education</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/music.m3u')">Music</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/documentary.m3u')">Documentary</a>
 
-    .channel-list, .sports-list, .sports-score-list, .fm-radio-list, .footer {
-      flex-shrink: 0;
-    }
-    
-    p1 {
-      
-      color: green;
-      font-size: 50px:
-    }
-
-  </style>
-</head>
-<body>
-
-<div class="video-container">
-  <video controls crossorigin playsinline class="js-player">
-    <source src="" type="application/x-mpegURL" id="video-source">
-  </video>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/languages/ben.m3u')">Bangladesh</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/local.m3u')">Local</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/other.m3u')">Others</a>
+        <a href="#" onclick="loadServer('https://iptv-org.github.io/iptv/categories/other.m3u')">All</a>
+        
+        
+    </div>
+    <br>
+    <input type="text" id="searchInput" placeholder="Search channels">
+    <div id="categories"></div>
+    <ul id="channelList" class="channel-list"></ul>
 </div>
-<br>
-  <p1>-This Channel will take some time to load, please wait.. </p1>
-  
-  <br> <br> <br> 
-<div class="channel-box">
-  <div id="jio-tv" class="content-section">
-    
-    
-    
-     <! --- --- Channel List---------  -----!>
-    
-    
-    <h2>Jio TV</h2>
-    <div class="jio-tv channel-list">
-      <div class="item" data-src="https://utube.buddyxiptv.com/@JamunaTVbd.m3u8">
-        <img src="https://www.desifreetv.com/news/wp-content/uploads/2020/05/jamunatv.jpg" alt="Channel 1">
-        <span>Jamuna TV</span>
-      </div>
-      <div class="item" data-src="http://210.4.72.204/hls-live/livepkgr/_definst_/liveevent/livestream3.m3u8">
-        <img src="https://th.bing.com/th/id/OIP.tVBLGCcICRn5cgtNer8nPwAAAA?w=200&h=200&rs=1&pid=ImgDetMain" alt="Channel 2">
-        <span>Ekushey TV</span>
-      </div>
-      <div class="item" data-src="https://amigofx.com:1936/channelsreporter/channelsreporter/playlist.m3u8">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaPAHF_X_BOTkb1ZXVrxT4Vp_8psjdnRM6gw&usqp=CAU" alt="Channel 3">
-      <span>Channel S</span>
-    </div>
-	<div class="item" data-src="http://103.230.105.252:1935/live/btv/manifest.m3u8-48aa-adcf-5a6c64da8c5c_3_playlist.m3u8">
-      <img src="https://i.ytimg.com/vi/hi9MfZR9_bo/hqdefault_live.jpg" alt="Channel 4">
-      <span>BTV</span>
-    </div>
-	<div class="item" data-src="https://varun-iptv.netlify.app/m3u/discoverybengali.m3u8">
-      <img src="https://th.bing.com/th/id/OIP.JkckBOdp_LurVn_ARscZwAHaD4?w=1200&h=630&rs=1&pid=ImgDetMain" alt="Channel 5">
-      <span>Discovery HD</span>
-    </div>
-      
-      
-      <div class="item" data-src="https://varun-iptv.netlify.app/m3u/discoverybengali.m3u8">
-      <img src="https://th.bing.com/th/id/OIP.knw41BiWhR5QdMtQH5zU_QHaHa?rs=1&pid=ImgDetMain" alt="Channel 6">
-      <span>Ekhon TV</span>
-    </div>	
-	<div class="item" data-src="http://85.237.89.6:9590/live/zinatvwild/index.m3u8">
-      <img src="https://th.bing.com/th/id/R.d63a58d06ac2af55031fe138d6185521?rik=ItgJ1CmtnGYoIQ&pid=ImgRaw&r=0" alt="Channel 10">
-      <span>Zina TV</span>
-    </div>
-	<div class="item" data-src="http://103.149.142.133/0.m3u8">
-      <img src="https://www.jagobd.com/wp-content/uploads/2020/05/Cumilla24.jpeg" alt="Channel 11">
-      <span>Cumilla TV</span>
-    </div>
-    <div class="item" data-src="https://deshitv.deshitv24.net/live/myStream/playlist.m3u8">
-      <img src="https://www.deshitv.com/images//bangla_logo/DeshTV24-BanglaLogo.png" alt="Channel 12">
-      <span>Desh TV</span>
-    </div>
-    <div class="item" data-src="https://byphdgllyk.gpcdn.net/hls/banglatvbd/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCvwRN5-SeVw9xFcogexADvfpU6Gpx8K3eg2x3SjkY_JGMotGFgeFFeDY&s=10" alt="Sports Channel 13">
-        <span>Bangla TV</span>
-      </div>
-      <div class="item" data-src="https://mtlivestream.com/asian/ytlive/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlVePf6b7h71j4gsGnNzI6chLlXi9liKKNjg&s" alt="Sports Channel 14">
-        <span>Asian TV</span>
-      </div>
-      <div class="item" data-src="https://byphdgllyk.gpcdn.net/hls/deeptotv/0_1/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQior3-tpfJbY39jnuyDJqkCDRLB7Iz1nYU4_aNHliSPUb6B2mM7iTu0kDL&s=10" alt="Sports Channel 15">
-        <span>Deepto TV</span>
-      </div>     
-    <div class="item" data-src="http://116.202.46.40:9023/SONY_MAX_HINDI/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYJXm7tBVFK3je1RtPXYRlm26d3bHPA5dV0w&s" alt="Sports Channel 21">
-        <span>Sony Max HD</span>
-      </div>
-      <div class="item" data-src="http://116.202.46.40:9023/SONY_TV_HINDI/index.m3u8">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Sony_Channel_Logo.png" alt="Sports Channel 22">
-        <span>Sony HD</span>
-      </div>
-      <div class="item" data-src="http://116.202.46.40:9023/SONY_SAB_HINDI/index.m3u8">
-        <img src="https://brand-websites-prod.s3.ap-south-1.amazonaws.com/sonyaath-live/revamp/channel_images/8_sab_0_2023_12_05_15_31_29.png" alt="Sports Channel 23">
-        <span>Sony Sab HD</span>
-      </div>
-      <div class="item" data-src="https://spt-sonykal-1-us.lg.wurl.tv/playlist.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoFt2Eg3HCb8zXCDrsB7ASTegaDhUD7ar-U8TSfILmpSBVUb2Fpo_KpVqK&s=10" alt="Sports Channel 24">
-        <span>Sony Kall</span>
-      </div>
-      
-      <div class="item" data-src="http://212.102.60.231/HBO/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe0eQGzf1xTpO1xcKa_rhUCNYANPq4ZVd6ag&s" alt="Sports Channel 28">
-        <span>HBO</span>
-      </div>
-      <div class="item" data-src="https://thaipbs-ujxrch.cdn.byteark.com/live/playlist_1080p/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuMJ_pv_UwsSruVLc9ihrAeaY75Km9hPFGow&usqp=CAU" alt="Sports Channel 29">
-        <span>Al TV</span>
-      </div>
-      <div class="item" data-src="http://banglajagotv.livebox.co.in:80/banglajagohls/24x7.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGe167yjB977DD6YjmDqVt9QOb2ZPqkCusAPqLvKqvv14eu3KzPExkLYEg&s=10" alt="Sports Channel 30">
-        <span>Bangla Jago</span>
-      </div>
-      <div class="item" data-src="https://live-hls-web-aje.getaj.net/AJE/03.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy4HGQPClaKfR6zQGPZ4cYFvGowJXEFsCVT8kI2njhBT0bOsXoHnnmYVk&s=10" alt="Sports Channel 31">
-        <span>Al Jazeera News</span>
-      </div>
-      <div class="item" data-src="https://shls-live-ak.akamaized.net/out/v1/b06a89a463764d3688cda337d40dc5bf/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScHhDE-tdx5VA7XqYsTeBMx-1bhMB0Xa1uRatFEavnR4uKz3O0Yea0n48&s=10" alt="Sports Channel 32">
-        <span>Nature</span>
-      </div>
-      <div class="item" data-src="https://varun-iptv.netlify.app/m3u/discoveryhindi.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjDPjpFoSc7u5GBmaYQoxWf16pG-vtSQc1zQ&usqp=CAU" alt="Sports Channel 33">
-        <span>Discovery Channel 1</span>
-      </div>
-      <div class="item" data-src="https://raw.githubusercontent.com/bruce78900/sstv/main/Animal_Planet.m3u8">
-        <img src="https://d3faj0w6aqatyx.cloudfront.net/uploads/2018/10/25115647/AnimalPlanet_Vertical_OneLineLarge_RGB-002.jpg" alt="Sports Channel 34">
-        <span>Animal planet</span>
-      </div
-      
-      <div></div>
-      <div class="item" data-src="https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiZZQvwqS1XoGHPIRLKydTrC0lG6H2nX47lUwtwnQX7F4B4WYk2YLKL5OL&s=10" alt="Sports Channel 35">
-        <span>DW</span>
-      </div>
-      
-      
-      
-      
-       <! ---   Islamic Channel List--------------!>
-      
-      <hr>
-      <br> 
-      <h2>Islamic Channel List</h2>  
-      <br>
-      
-      <div class="item" data-src="http://124.109.47.101/hls/stream1.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS6O7riNVqYxsYETqwT9Yuo26OQedysJNyVQ&s" alt="Sports Channel 19">
-        <span>Aurlife</span>
-      </div>
-      <div class="item" data-src="https://streaming.madanichannel.tv/static/streaming-playlists/hls/d3e49b76-ac06-4689-a641-9200445b647f/master.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA6RZs6lLEnWoiTFzTseUDj6FUcblv-91pH-QT-lodmPLCblYnL3lJAVIZ&s=10" alt="Sports Channel 20">
-        <span>Madani TV</span>
-      </div>
-      <div class="item" data-src="https://ap02.iqplay.tv:8082/iqb8002/i09/playlist.m3u8">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHv1dNLlYuHca3d7cVuZET4-7K1b-F9FzzYg&usqp=CAU" alt="Channel 16">
-      <span>ION TV</span>
-    </div>
-    <div class="item" data-src="https://ap02.iqplay.tv:8082/iqb8002/d33ntv/playlist.m3u8">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZxVqHZR2ekZrFybNlr3nyQmeEWpO60HKJeg&usqp=CAU" alt="Channel 17">
-      <span>Deen TV</span>
-    </div>
-    <div class="item" data-src="https://livemtaasia.akamaized.net/hls/live/2039224/mta6asia/playlist.m3u8">
-      <img src="https://mir-s3-cdn-cf.behance.net/projects/404/ac3eae157979943.Y3JvcCw4OTQsNzAwLDE3Miww.png" alt="Channel 18">
-      <span>Mta Asia </span>
-    </div>
-    <div class="item" data-src="https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8">
-      <img src="https://yt3.ggpht.com/a-/AAuE7mDUTqUcgdZdmYRqZ5g5_qsZeZ6D7DrIaMlsmQ=s900-mo-c-c0xffffffff-rj-k-no" alt="Channel 7">
-      <span>Peace TV Bangla</span>
-    </div>
-	<div class="item" data-src="https://dzkyvlfyge.erbvr.com/PeaceTvUrdu/tracks-v3a1/mono.m3u8">
-      <img src="https://assets.peacetv.tv/images/intro/ur-logo.png" alt="Channel 8">
-      <span>Peace TV Urdu</span>
-    </div>
-      
-      
-      
-      
-      
-      
-      <! ---   Kids Channel List--------------!>
-      
-      
-      
-      <hr>
-      <br> 
-      <h2>Kids List</h2>
-      
-      
-      <br>
-      
-      <div class="item" data-src="https://varun-iptv.netlify.app/m3u/discoverykidshindi.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_lF0B07444HWY5PrCtln0sA8fvUMCQwOfKA&usqp=CAU" alt="Sports Channel 1">
-        <span>Discovery Kids </span>
-      </div>
-       <div class="item" data-src="http://212.102.60.231/DISNEY_JR/tracks-v1a1/mono.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPq0Ge-U_BWsIMNyIb_NFzIbDmC2Ne9PaWfQfitCWFdeGnQfxCKAAl460&s=10" alt="Sports Channel 27">
-        <span>Disney Jr.</span>
-      </div>
-      <div class="item" data-src="http://212.102.60.231/NICK_JR/index.m3u8">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Nick_Jr._logo_2023_%28outline%29.svg" alt="Sports Channel 26">
-        <span>Nick Jr.</span>
-      </div>
-      <div class="item" data-src="https://amg01448-samsungin-cartoonnw-samsungin-1y8kz.amagi.tv/playlist/amg01448-samsungin-cartoonnw-samsungin/cb553d1e786c648b93d43d63d5ef41a4d3246ad3032e90703dff06c231901d468ca2f9d3f537b63619d714af3f5e2f0e0433db18dd6511b6802eea0e6d287f09cfcceb2ada861317b3c60e383ebb281700ab0941d8380220dcec5759d438b0340446b00a230f338fbe51aa7e55978808821d57b189e5a4fd04706ded294fdfd20ffda8bd0c118d2ff9932372a75e26c7199604e6368ff19702cf69b66cc1168caa08baf212e7868bfa2a50c24d1bb2ccf90b774fb3833797c9936876b879294d1f6fb8c9cbfc4a7292524159fafadfbe37b04a80d165c94c3eb5158014a53e8e79a500a3a11ff3e4fbfe4c452babcd5f590aa5e1a98ba87a62f337b5f39bbd091c93944c2a5fa8718f3a353705d56f1c4b0b9a90d86276/82/640x360_1284800/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmaqf6kmMG2Jvpmu2p4X4kk45Ip1pMjDeJEke2g3ukNa6PaXKtETpEptc&s=10" alt="Sports Channel 25">
-        <span>CN</span>
-      </div>   
-      <div class="item" data-src="https://fl2.moveonjoy.com/NICKELODEON/index.m3u8">
-      <img src="https://th.bing.com/th/id/OIP.OU4cUaP91-tAbYLAanS0hQAAAA?rs=1&pid=ImgDetMain" alt="Channel 9">
-      <span>Nick HD+</span>
-    </div>
-      
-      
-       <! ---   Sports Channel List--------------!>
-      
-      
-      
-  
-      <hr>
-      <br> 
-      <h2>Sports List</h2>
-      
-      
-      <br>
-      
-      <div class="item" data-src="http://example.com/sports-channel1.m3u8">
-        <img src="https://th.bing.com/th/id/OIP.D_k2Vl7mzEYsij3arXInawAAAA?w=200&h=200&rs=1&pid=ImgDetMain" alt="Sports Channel 1">
-        <span>T-Sports</span>
-      </div>
-      
-      <div class="item" data-src="http://176.9.60.218:8080/BE1HDHEVC/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnOY1yC0O_nuFGdMzGhvAK9L3JnYD6UJw3-qABYy_Xe1cQj31bNDQimXo&s=10" alt="Sports Channel 1">
-        <span>beIN sports 1</span>
-      </div>
-	<div class="item" data-src="https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8">
-      <img src="https://image.xumo.com/v1/channels/channel/99991387/600x600.webp?type=color_onBlack" alt="Sports Channel 2">
-      <span>beIN Sports Xtra</span>
-    </div>
-	<div class="item" data-src="https://humsab.xyz/S_Ten5/index.m3u8">
-      <img src="https://th.bing.com/th/id/OIP.u_3X5hyRlnbUMsRA33bj1gAAAA?rs=1&pid=ImgDetMain" alt="Sports Channel 3">
-      <span>Sony Sports5</span>
-    </div>
-	<div class="item" data-src="http://example.com/sports-channel1.m3u8">
-      <img src="https://th.bing.com/th/id/OIP.y1kfHkfyrlApaTxCkxChAQHaHa?rs=1&pid=ImgDetMain" alt="Sports Channel 4">
-      <span>Extra Sports</span>
-    </div>
-	<div class="item" data-src="https://varun-iptv.netlify.app/m3u/Eurosport.m3u8">
-      <img src="https://th.bing.com/th/id/OIP.GH_4N4cvFC-NKzzzQQgFhQHaHa?w=500&h=500&rs=1&pid=ImgDetMain" alt="Sports Channel 5">
-      <span>Euro Sports 1</span>
-    </div>
-	<div class="item" data-src="https://humsab.xyz/S_Ten5/index.m3u8">
-      <img src="https://th.bing.com/th/id/OIP.HUa8nib80hjrivblcaImFQHaHa?w=500&h=500&rs=1&pid=ImgDetMain" alt="Sports Channel 6">
-      <span>Euro Sports 2</span>
-    </div>
-    <div class="item" data-src="http://145.239.5.177:8080/567/index.m3u8">
-      <img src="https://www.placemyad.co.za/wp-content/uploads/logo-23.png" alt="Sports Channel 7">
-      <span>Grandstand</span>
-    </div>
-	
-    <div class="item" data-src="https://edge6a.v2h-cdn.com/t_sport/t_sport.stream/playlist.m3u8">
-        <img src="https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/89/05/30/8905309c-180b-8e2f-e069-5c1d5a579bd7/source/512x512bb.jpg" alt="Sports Channel 9">
-        <span>T-Sports Others</span>
-      </div>
-    <div class="item" data-src="http://145.239.5.177:8080/518/index.m3u8">
-        <img src="https://th.bing.com/th/id/OIP.EaNSOwQ-kSG4wA6GW3L99wHaD2?rs=1&pid=ImgDetMain" alt="Sports Channel 8">
-        <span>Amazon-Sports</span>
-      </div>
-      <div class="item" data-src="http://144.178.85.10:8080/ESPN1/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlfy_mDrQMpqt4fV4-sKPKzGMEoooKRh_Zdu_fSrZi980YcBl4oqZO8yY&s=10" alt="Sports Channel 1">
-        <span>ESPN Live</span>
-      </div>
-      <div class="item" data-src="http://103.199.161.254/Content/ddsports/Live/Channel(DDSPORTS)/index.m3u8">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXFOyzyD_StzIsw2VF6y6qWNw6mrdvK0OHx4PfHtj5YBjwDdUWz8PixitS&s=10" alt="Sports Channel 1">
-        <span>DD Sports</span>
-      </div>
-      
-      <div class="item" data-src="https://hotflix-bd.online/Star-Sports-1/video.m3u8?token=3b1e5cfa094fa77ff836f776bde43d53e0f21498-75e141b96b9ff0e46130946949623aa7-1723744015-1723733215&remote=103.115.243.140">
-        <img src="https://exchange4media.gumlet.io/news-photo/126372-110566-image-2021-01-29T135100.916.webp" alt="Sports Channel 1">
-        <span>Sports Star 1</span>
-      </div>
-   
-      
-       <! ---  Radio Channel List--------------!>
-      
-<hr>
-      <br>
-      <h2>FM Radio</h2>
-      <br>
- 
-      <div class="item" data-src="https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_89FM.mp3">
-        <img src="https://cdn-radiotime-logos.tunein.com/s148546d.png" alt="FM Radio 1">
-        <span>FM Radio 89</span>
-      </div>
-    <div class="item" data-src="http://stream.zeno.fm/7yu7rczw34zuv">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOb6wXTFeep4bvbJTgl00NElVnZWA_tkMaLw&s" alt="FM Radio 2">
-        <span>Bhumi Radio 1</span>
-      </div>
-    <div class="item" data-src="https://stream.zeno.fm/8wv4d8g4344tv">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxgoZdjAkDviJACgbhHXxRbxGguFP_ZQRmAasx_QGBndrNY6m1KFyoJMU&s=10" alt="FM Radio 3">
-        <span>Radio today</span>
-      </div>
-    <div class="item" data-src="http://stream.zeno.fm/hp720uqw34zuv">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4A2a2dJ3bthJQZjNgvsZj18E4f11K1hXbCw&s" alt="FM Radio 4">
-        <span>Capital FM</span>
-      </div>
-    <div class="item" data-src="http://stream.zenolive.com/avxwtgyxubwtv">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSq-hUZIXw14eW_z-_-PPcJDdxPTnHvcPGw4U4TOGHTDOlTuAJs5nOPbQ&s=10" alt="FM Radio 5">
-        <span>Radio Sadhin 92.4</span>
-      </div>	
-      
-      
-      
-      
-      
-      <footer class="footer">
+
+  <footer class="footer">
     <div class="social-icons">
       <a href="https://www.facebook.com/muhammadsultanarabi" target="_blank">Facebook</a> |
       <a href="https://www.twitter.com/sultanarabi161" target="_blank">X</a> |
       <a href="https://www.instagram.com/muhammadsultanarabi161" target="_blank">Instagram</a>
     </div>
     <div class="developer-info">
-      <p>Developed by: Sultan Arabi (Johirul Islam)</p>
+      <p>Developed by: Sultan Arabi (Johirul islam)</p>
       <p>Email: sultanarabi161@gmail.com</p>
       <p>Website: <a href="https://sultanarabi.news.blog" target="_blank"
           style="color: white;">sultanarabi.news.blog</a></p>
-      <p>&copy; 2024 IBN TV(.v0.4) All Rights Reserved.</p>
+      <p>&copy; 2024 IBN TV. All Rights Reserved.</p>
     </div>
   </footer>
-</div>
-      
-      
-      
-      
-      
-    </div>
-  </div>
-  
-  
 
-  
 
-<script src='https://cdn.plyr.io/3.5.6/plyr.js'></script>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<!-- Include this just before the closing </body> tag -->
+<script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const video = document.querySelector('.js-player');
-    const player = new Plyr(video);
+    document.addEventListener('DOMContentLoaded', () => {
+        const controls = [
+            'play-large',      // The large play button in the center
+            'restart',         // Restart playback
+            'rewind',          // Rewind by the seek time (default 10 seconds)
+            'play',            // Play/pause playback
+            'fast-forward',    // Fast forward by the seek time (default 10 seconds)
+            'progress',        // The progress bar and scrubber for playback and buffering
+            'current-time',    // The current time of playback
+            'duration',        // The full duration of the media
+            'mute',            // Toggle mute
+            'volume',          // Volume control
+            'captions',        // Toggle captions
+            'settings',        // Settings menu
+            'pip',             // Picture-in-picture (currently Safari only)
+            'airplay',         // Airplay (currently Safari only)
+            'fullscreen'       // Toggle fullscreen
+        ];
 
-    document.querySelectorAll('.item').forEach(item => {
-      item.addEventListener('click', () => {
-        const source = item.getAttribute('data-src');
-        if (Hls.isSupported()) {
-          const hls = new Hls();
-          hls.loadSource(source);
-          hls.attachMedia(video);
-          hls.on(Hls.Events.MANIFEST_PARSED, function() {
-            video.play();
-          });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = source;
-          video.addEventListener('loadedmetadata', function() {
-            video.play();
-          });
+        const player = Plyr.setup('.js-player', { controls });
+
+        // Function to play channel
+        function playChannel(url) {
+            player[0].source = {
+                type: 'video',
+                sources: [
+                    {
+                        src: url,
+                        type: 'video/mp4',
+                    }
+                ],
+            };
+            player[0].play();
         }
-        player.play();
-      });
+        
+        // Override the playChannel function with Plyr's player
+        window.playChannel = playChannel;
+
+        // Initialize the default server
+        loadServer('https://iptv-org.github.io/iptv/categories/news.m3u');
     });
-  });
+
+    async function fetchChannels(url) {
+        const response = await fetch(url);
+        const data = await response.text();
+        return data;
+    }
+
+    function parseM3U(data) {
+        const channels = [];
+        const lines = data.split('\n');
+
+        lines.forEach((line, index) => {
+            if (line.startsWith('#EXTINF:')) {
+                const info = line.split(',');
+                const [name, category, logo] = info[1].split(';');
+                const url = lines[index + 1];
+                channels.push({ name, category, logo, url });
+            }
+        });
+
+        return channels;
+    }
+
+    function displayChannels(channels) {
+        const channelList = document.getElementById('channelList');
+        channelList.innerHTML = '';
+
+        channels.forEach(channel => {
+            const listItem = document.createElement('li');
+            listItem.className = 'channel-item';
+            listItem.innerHTML = `
+                <img src="${channel.logo || 'https://via.placeholder.com/50'}" alt="${channel.name}">
+                <span>${channel.name}</span>
+            `;
+            listItem.onclick = () => playChannel(channel.url);
+            channelList.appendChild(listItem);
+        });
+    }
+
+    function filterChannels(channels, query) {
+        return channels.filter(channel =>
+            channel.name.toLowerCase().includes(query.toLowerCase())
+        );
+    }
+
+    async function loadServer(url) {
+        const data = await fetchChannels(url);
+        const channels = parseM3U(data);
+        displayChannels(channels);
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.oninput = () => {
+            const filteredChannels = filterChannels(channels, searchInput.value);
+            displayChannels(filteredChannels);
+        };
+    }
 </script>
 
-</body>
-</html>
+
