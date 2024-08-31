@@ -1,446 +1,594 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-  <meta charset="UTF-8">
-
-  <title>Custom Controls with Plyr.io Video Player</title>
-
-  <link rel='stylesheet' href='https://cdn.plyr.io/3.5.6/plyr.css'>
-
-</head>
-
-<body>
-
-<video id="player" controls crossorigin playsinline class="js-player" 
-
-       poster="https://th.bing.com/th/id/R.e3178dc9899e213464f79fc12802315f?rik=4sH1hAKHqq%2bQXg&pid=ImgRaw&r=0">
-
-  <!-- HLS ভিডিও ফাইল -->
-
-</video>
-
-<script src='https://cdn.plyr.io/3.5.6/plyr.js'></script>
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-<script>
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const controls = [
-
-            'play-large', // The large play button in the center
-
-            'restart', // Restart playback
-
-            'rewind', // Rewind by the seek time (default 10 seconds)
-
-            'play', // Play/pause playback
-
-            'fast-forward', // Fast forward by the seek time (default 10 seconds)
-
-            'progress', // The progress bar and scrubber for playback and buffering
-
-            'current-time', // The current time of playback
-
-            'duration', // The full duration of the media
-
-            'mute', // Toggle mute
-
-            'volume', // Volume control
-
-            'captions', // Toggle captions
-
-            'settings', // Settings menu
-
-            'pip', // Picture-in-picture (currently Safari only)
-
-            'airplay', // Airplay (currently Safari only)
-
-           
-
-            'fullscreen' // Toggle fullscreen
-
-        ];
-
-        const player = new Plyr('#player', { controls });
-
-        if (Hls.isSupported()) {
-
-            const hls = new Hls();
-
-            hls.loadSource('https://dzkyvlfyge.erbvr.com/PeaceTvUrdu/tracks-v3a1/mono.m3u8');
-
-            hls.attachMedia(document.getElementById('player'));
-
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-
-              player.play();
-
-            });
-
-        } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
-
-            player.src = 'https://dzkyvlfyge.erbvr.com/PeaceTvUrdu/tracks-v3a1/mono.m3u8';
-
-        }
-
-    });
-
-</script>
-
-</body>
-
-</html>
-
-
-<hr>
-
-<b><b><b><br><br><br>
-
-
-
-<b>Peace TV Bangla</b> is an Islamic television channel that broadcasts religious and educational content in the Bengali language. As part of the Peace TV network, the channel is dedicated to spreading the teachings of Islam, promoting peace, and fostering understanding among viewers. Peace TV Bangla offers a variety of programs, including Quranic recitations, lectures by renowned Islamic scholars, talk shows, and educational series aimed at deepening the understanding of Islamic principles. The channel also addresses social issues from an Islamic perspective and provides guidance on living a life in accordance with Islamic values. Peace TV Bangla is watched by millions of Bengali-speaking Muslims around the world and is known for its commitment to promoting positive values and peaceful coexistence.
-  
-  
-  <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUHf8UTjB9rtfErzcRMoAicNTF5j12UtQKxcvw6SHyzgaIpBtKlvW2yhac3LSTgSXHfVdVhDRl8Y6AT2-HNxDZME3F0MjBVje63H7ITZ2AW-BiWKvSzyXPReA8W9UG0KbAn8rXULxQUFI2BN9nuZlkAZFOtFsD_Ac6mnLuuqt9QGH_e2k2jaAHsB59Cjo/s1280/maxresdefault_live.jpg" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" width="320" data-original-height="720" data-original-width="1280" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUHf8UTjB9rtfErzcRMoAicNTF5j12UtQKxcvw6SHyzgaIpBtKlvW2yhac3LSTgSXHfVdVhDRl8Y6AT2-HNxDZME3F0MjBVje63H7ITZ2AW-BiWKvSzyXPReA8W9UG0KbAn8rXULxQUFI2BN9nuZlkAZFOtFsD_Ac6mnLuuqt9QGH_e2k2jaAHsB59Cjo/s320/maxresdefault_live.jpg"/></a></div>
-
 
 
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <title>Custom Controls with Plyr.io Video Player</title>
-
-  <link rel='stylesheet' href='https://cdn.plyr.io/3.5.6/plyr.css'>
-
-</head>
-
-<body>
-
-<video id="player" controls crossorigin playsinline class="js-player" 
-
-       poster="https://mir-s3-cdn-cf.behance.net/projects/404/ac3eae157979943.Y3JvcCw4OTQsNzAwLDE3Miww.png">
-
-  <!-- HLS ভিডিও ফাইল -->
-
-</video>
-
-<script src='https://cdn.plyr.io/3.5.6/plyr.js'></script>
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-<script>
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const controls = [
-
-            'play-large', // The large play button in the center
-
-            'restart', // Restart playback
-
-            'rewind', // Rewind by the seek time (default 10 seconds)
-
-            'play', // Play/pause playback
-
-            'fast-forward', // Fast forward by the seek time (default 10 seconds)
-
-            'progress', // The progress bar and scrubber for playback and buffering
-
-            'current-time', // The current time of playback
-
-            'duration', // The full duration of the media
-
-            'mute', // Toggle mute
-
-            'volume', // Volume control
-
-            'captions', // Toggle captions
-
-            'settings', // Settings menu
-
-            'pip', // Picture-in-picture (currently Safari only)
-
-            'airplay', // Airplay (currently Safari only)
-
-           
-
-            'fullscreen' // Toggle fullscreen
-
-        ];
-
-        const player = new Plyr('#player', { controls });
-
-        if (Hls.isSupported()) {
-
-            const hls = new Hls();
-
-            hls.loadSource('https://deshitv.deshitv24.net/live/myStream/playlist.m3u8');
-
-            hls.attachMedia(document.getElementById('player'));
-
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-
-              player.play();
-
-            });
-
-        } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
-
-            player.src = 'https://deshitv.deshitv24.net/live/myStream/playlist.m3u8';
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        /* Link Styles */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #333;
         }
 
-    });
-
-</script>
-
-</body>
-
-</html>
-
-
-<hr>
-
-<b><b><b><br><br><br>
-
-  
-  
- <b> Desh TV</b> is a popular Bengali-language television channel in Bangladesh, recognized for its diverse and engaging programming. Launched in 2009, Desh TV offers a wide range of content, including news, entertainment, dramas, talk shows, music programs, and cultural events. The channel is committed to providing reliable news coverage and current affairs programs that keep viewers informed about national and international events. Desh TV also features a variety of entertainment shows, including popular serials, reality shows, and special broadcasts that appeal to a broad audience. With a focus on promoting Bengali culture and values, Desh TV has established itself as a prominent media outlet in Bangladesh, catering to viewers of all ages.
-
-
-  <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZlt-GWodv8dhuHdexm1lC_vj827xpMIS5kaJi4f5wkgdDn2cW1YXFT8V0j4Tc0sRdVfdGdkEWIF4q8o15MaG7MXUtkFcRqnMsttbID0b04DeI8g64fe_bmevrRmM_LCXJkjggTqd-Ljp8n4qwpeB07NCDW5nNMckYpP2lCTzeYT08JcEXOCg18nUtIjc/s500/b2d9d1a4dd594c8f0bedfaf9f6a95b2c.jpg" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" width="320" data-original-height="263" data-original-width="500" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZlt-GWodv8dhuHdexm1lC_vj827xpMIS5kaJi4f5wkgdDn2cW1YXFT8V0j4Tc0sRdVfdGdkEWIF4q8o15MaG7MXUtkFcRqnMsttbID0b04DeI8g64fe_bmevrRmM_LCXJkjggTqd-Ljp8n4qwpeB07NCDW5nNMckYpP2lCTzeYT08JcEXOCg18nUtIjc/s320/b2d9d1a4dd594c8f0bedfaf9f6a95b2c.jpg"/></a></div>
-  
-  
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-  <meta charset="UTF-8">
-
-  <title>Custom Controls with Plyr.io Video Player</title>
-
-  <link rel='stylesheet' href='https://cdn.plyr.io/3.5.6/plyr.css'>
-
-</head>
-
-<body>
-
-<video id="player" controls crossorigin playsinline class="js-player" 
-
-       poster="https://2.bp.blogspot.com/-NmdR84WTfnw/WJizGtFIfYI/AAAAAAAAAIA/9JyfEjePHdYIwrQ7B1VTlDZnVNP4ZA1uwCLcB/s1600/Ekushey%2BTV.png">
-
-  <!-- HLS ভিডিও ফাইল -->
-
-</video>
-
-<script src='https://cdn.plyr.io/3.5.6/plyr.js'></script>
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-<script>
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const controls = [
-
-            'play-large', // The large play button in the center
-
-            'restart', // Restart playback
-
-            'rewind', // Rewind by the seek time (default 10 seconds)
-
-            'play', // Play/pause playback
-
-            'fast-forward', // Fast forward by the seek time (default 10 seconds)
-
-            'progress', // The progress bar and scrubber for playback and buffering
-
-            'current-time', // The current time of playback
-
-            'duration', // The full duration of the media
-
-            'mute', // Toggle mute
-
-            'volume', // Volume control
-
-            'captions', // Toggle captions
-
-            'settings', // Settings menu
-
-            'pip', // Picture-in-picture (currently Safari only)
-
-            'airplay', // Airplay (currently Safari only)
-
-           
-
-            'fullscreen' // Toggle fullscreen
-
-        ];
-
-        const player = new Plyr('#player', { controls });
-
-        if (Hls.isSupported()) {
-
-            const hls = new Hls();
-
-            hls.loadSource('http://210.4.72.204/hls-live/livepkgr/_definst_/liveevent/livestream3.m3u8');
-
-            hls.attachMedia(document.getElementById('player'));
-
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-
-              player.play();
-
-            });
-
-        } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
-
-            player.src = 'http://210.4.72.204/hls-live/livepkgr/_definst_/liveevent/livestream3.m3u8';
-
+        /* Header Section */
+        header {
+            width: 100%;
+            background-color: #282c34;
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+        }
+        h1 {
+            margin: 20px 0 10px;
+            font-size: 3rem;
+        }
+        h2 {
+            margin: 10px 0;
+            font-weight: normal;
+            color: #61dafb;
+        }
+        img.headshot {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+        video {
+            margin-top: 20px;
+            width: 70%;
+            max-width: 600px;
+            border-radius: 10px;
         }
 
-    });
-
-</script>
-
-</body>
-
-</html>
-
-
-<hr>
-
-<b><b><b><br><br><br>
-
-
-  
-<b>  Ekushey TV (ETV) </b>is a leading Bengali-language television channel in Bangladesh, renowned for its wide array of programming that caters to a diverse audience. Launched in 2000, ETV was the first private terrestrial channel in the country and has since become a household name. The channel offers a mix of news, current affairs, entertainment, dramas, talk shows, and educational programs. Known for its credible and timely news coverage, Ekushey TV plays a significant role in shaping public opinion in Bangladesh. The channel also broadcasts cultural programs, documentaries, and special events that highlight the rich cultural heritage of the country. ETV's content is designed to appeal to viewers of all ages, making it one of the most popular channels in Bangladesh.
-
-
-
-  <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgup25heel02JuWMkUTQz98j1umpklaVtEEQu67QAdSsQfMVgFZjyF2Hq7KAsjqw8nZ8Q9sGa86c8-TeYC4kFcGn4bjUlIpTZ7o06-BMFeEnNweYMrCHRP9ol9y-XvmCD8Pl6cz2btKUCEOs0umzLcM9iE46fC4u55hj-KjR5dx1F05U_rKIXElw3AuzSA/s401/Ekushey%20TV.png" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" width="320" data-original-height="226" data-original-width="401" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgup25heel02JuWMkUTQz98j1umpklaVtEEQu67QAdSsQfMVgFZjyF2Hq7KAsjqw8nZ8Q9sGa86c8-TeYC4kFcGn4bjUlIpTZ7o06-BMFeEnNweYMrCHRP9ol9y-XvmCD8Pl6cz2btKUCEOs0umzLcM9iE46fC4u55hj-KjR5dx1F05U_rKIXElw3AuzSA/s320/Ekushey%20TV.png"/></a></div>
-
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-  <meta charset="UTF-8">
-
-  <title>Custom Controls with Plyr.io Video Player</title>
-
-  <link rel='stylesheet' href='https://cdn.plyr.io/3.5.6/plyr.css'>
-
-</head>
-
-<body>
-
-<video id="player" controls crossorigin playsinline class="js-player" 
-
-       poster="https://2.bp.blogspot.com/-NmdR84WTfnw/WJizGtFIfYI/AAAAAAAAAIA/9JyfEjePHdYIwrQ7B1VTlDZnVNP4ZA1uwCLcB/s1600/Ekushey%2BTV.png">
-
-  <!-- HLS ভিডিও ফাইল -->
-
-</video>
-
-<script src='https://cdn.plyr.io/3.5.6/plyr.js'></script>
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-<script>
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const controls = [
-
-            'play-large', // The large play button in the center
-
-            'restart', // Restart playback
-
-            'rewind', // Rewind by the seek time (default 10 seconds)
-
-            'play', // Play/pause playback
-
-            'fast-forward', // Fast forward by the seek time (default 10 seconds)
-
-            'progress', // The progress bar and scrubber for playback and buffering
-
-            'current-time', // The current time of playback
-
-            'duration', // The full duration of the media
-
-            'mute', // Toggle mute
-
-            'volume', // Volume control
-
-            'captions', // Toggle captions
-
-            'settings', // Settings menu
-
-            'pip', // Picture-in-picture (currently Safari only)
-
-            'airplay', // Airplay (currently Safari only)
-
-           
-
-            'fullscreen' // Toggle fullscreen
-
-        ];
-
-        const player = new Plyr('#player', { controls });
-
-        if (Hls.isSupported()) {
-
-            const hls = new Hls();
-
-            hls.loadSource('http://210.4.72.204/hls-live/livepkgr/_definst_/liveevent/livestream3.m3u8');
-
-            hls.attachMedia(document.getElementById('player'));
-
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-
-              player.play();
-
-            });
-
-        } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
-
-            player.src = 'http://210.4.72.204/hls-live/livepkgr/_definst_/liveevent/livestream3.m3u8';
-
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(40, 44, 52, 0.9);
+            padding: 10px 0;
+            z-index: 1000;
+            transition: background 0.3s ease;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul li a {
+            font-size: 1rem;
+            color: white;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            color: #61dafb;
         }
 
-    });
+        /* About Me Section */
+        #about {
+            background-color: #f0f0f0;
+        }
+        #skill-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        #skill-cloud span {
+            background-color: #61dafb;
+            color: white;
+            margin: 10px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+        }
+        #skill-cloud span:hover {
+            transform: scale(1.1);
+        }
+        #theme-toggle {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #61dafb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-</script>
+        /* Portfolio Section */
+        #portfolio {
+            background-color: #fff;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .portfolio-item img {
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        .portfolio-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .portfolio-item:hover .overlay {
+            opacity: 1;
+        }
+
+        /* Experience Section */
+        #experience {
+            background-color: #f0f0f0;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #61dafb;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .timeline-item {
+            padding: 20px 30px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: white;
+            border: 4px solid #61dafb;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-item.left {
+            left: 0;
+        }
+        .timeline-item.right {
+            left: 50%;
+        }
+        .timeline-item.left::after {
+            left: -13px;
+        }
+        .timeline-item.right::after {
+            left: -13px;
+        }
+        .timeline-item-content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .timeline-item-content h3 {
+            margin-top: 0;
+            color: #61dafb;
+        }
+        .timeline-item-content p {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        /* Skills Section */
+        #skills {
+            background-color: #fff;
+        }
+        .skills-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .skills-icons i {
+            font-size: 3rem;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        .skills-icons i:hover {
+            color: #61dafb;
+        }
+
+        /* Resources Section */
+        #resources {
+            background-color: #f0f0f0;
+        }
+        .resources-list {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .resource-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .resource-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Blog Section */
+        #blog {
+            background-color: #fff;
+        }
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .blog-post {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        .blog-post:hover {
+            transform: translateY(-10px);
+        }
+        .blog-post h3 {
+            color: #61dafb;
+        }
+
+        /* Contact Me Section */
+        #contact {
+            background-color: #f0f0f0;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        form input, form textarea {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        form button {
+            padding: 15px;
+            background-color: #61dafb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        form button:hover {
+            background-color: #21a1f1;
+        }
+
+        /* Social Media Icons */
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .social-icons a {
+            margin: 0 15px;
+            color: #333;
+            font-size: 2rem;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #61dafb;
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+        .dark-mode header {
+            background-color: #1c1f25;
+        }
+        .dark-mode nav {
+            background: rgba(28, 31, 37, 0.9);
+        }
+        .dark-mode #theme-toggle {
+            background-color: #282c34;
+        }
+        .dark-mode .portfolio-item .overlay {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .dark-mode .timeline::after {
+            background-color: #21a1f1;
+        }
+        .dark-mode .skills-icons i {
+            color: #ccc;
+        }
+        .dark-mode .skills-icons i:hover {
+            color: #21a1f1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 30px 0;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            video {
+                width: 90%;
+            }
+            nav ul li {
+                margin: 0 10px;
+            }
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 40px;
+            }
+            .timeline-item::after {
+                left: 20px !important;
+            }
+            .timeline-item.right {
+                left: 0 !important;
+            }
+            form input, form textarea {
+                font-size: 0.9rem;
+            }
+            form button {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-icons a {
+                font-size: 1.5rem;
+                margin: 0 10px;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+            header h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header id="home">
+        <div class="header-container">
+            <img src="assets/images/headshot.jpg" alt="Headshot" class="headshot">
+            <h1>Your Name</h1>
+            <h2>Web Developer</h2>
+            <video controls>
+                <source src="assets/videos/introduction.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Me Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Your detailed bio goes here...</p>
+        <div id="skill-cloud">
+            <!-- Dynamically generated skill cloud here -->
+        </div>
+        <button id="theme-toggle">Toggle Dark/Light Mode</button>
+    </section>
+
+    <!-- Interactive Portfolio Section -->
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="assets/images/project1.jpg" alt="Project 1">
+                <div class="overlay">
+                    <p>Project 1 Description</p>
+                    <a href="video-demo-link" target="_blank">Watch Demo</a>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/images/project2.jpg" alt="Project 2">
+                <div class="overlay">
+                    <p>Project 2 Description</p>
+                    <a href="video-demo-link" target="_blank">Watch Demo</a>
+                </div>
+            </div>
+            <!-- Add more portfolio items as needed -->
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-item-content">
+                    <h3>Company Name</h3>
+                    <p>Job Title</p>
+                    <span>Year - Year</span>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-item-content">
+                    <h3>Company Name</h3>
+                    <p>Job Title</p>
+                    <span>Year - Year</span>
+                </div>
+            </div>
+            <!-- Add more timeline items as needed -->
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-icons">
+            <i class="fab fa-html5"></i>
+            <i class="fab fa-css3-alt"></i>
+            <i class="fab fa-js"></i>
+            <i class="fab fa-react"></i>
+            <i class="fab fa-node-js"></i>
+            <!-- Add more skill icons as needed -->
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources">
+        <h2>Resources</h2>
+        <div class="resources-list">
+            <div class="resource-item">
+                <h3>Template 1</h3>
+                <p>Download this template for free!</p>
+                <a href="download-link" download>Download</a>
+            </div>
+            <div class="resource-item">
+                <h3>Code Snippet 1</h3>
+                <p>Use this code snippet in your projects.</p>
+                <a href="download-link" download>Download</a>
+            </div>
+            <!-- Add more resource items as needed -->
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog">
+        <h2>Blog</h2>
+        <div class="blog-posts">
+            <div class="blog-post">
+                <h3>Blog Post 1</h3>
+                <p>Summary of the blog post goes here...</p>
+                <a href="blog-post-link">Read More</a>
+            </div>
+            <div class="blog-post">
+                <h3>Blog Post 2</h3>
+                <p>Summary of the blog post goes here...</p>
+                <a href="blog-post-link">Read More</a>
+            </div>
+            <!-- Add more blog posts as needed -->
+        </div>
+    </section>
+
+    <!-- Contact Me Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form>
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+    </section>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Toggle Dark/Light Mode
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Example: You can dynamically add skills to the skill cloud here.
+        const skillCloud = document.getElementById('skill-cloud');
+        const skills = ['JavaScript', 'HTML', 'CSS', 'React', 'Python', 'Communication', 'Problem-Solving'];
+        skills.forEach(skill => {
+            let span = document.createElement('span');
+            span.textContent = skill;
+            span.style.fontSize = `${Math.random() * 20 + 10}px`;
+            skillCloud.appendChild(span);
+        });
+    </script>
 
 </body>
-
 </html>
-
-
-<hr>
-
-<b><b><b><br><br><br>
-
-
-  
-<b>  Ekushey TV (ETV) </b>is a leading Bengali-language television channel in Bangladesh, renowned for its wide array of programming that caters to a diverse audience. Launched in 2000, ETV was the first private terrestrial channel in the country and has since become a household name. The channel offers a mix of news, current affairs, entertainment, dramas, talk shows, and educational programs. Known for its credible and timely news coverage, Ekushey TV plays a significant role in shaping public opinion in Bangladesh. The channel also broadcasts cultural programs, documentaries, and special events that highlight the rich cultural heritage of the country. ETV's content is designed to appeal to viewers of all ages, making it one of the most popular channels in Bangladesh.
-
-
-
-  <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgup25heel02JuWMkUTQz98j1umpklaVtEEQu67QAdSsQfMVgFZjyF2Hq7KAsjqw8nZ8Q9sGa86c8-TeYC4kFcGn4bjUlIpTZ7o06-BMFeEnNweYMrCHRP9ol9y-XvmCD8Pl6cz2btKUCEOs0umzLcM9iE46fC4u55hj-KjR5dx1F05U_rKIXElw3AuzSA/s401/Ekushey%20TV.png" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" width="320" data-original-height="226" data-original-width="401" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgup25heel02JuWMkUTQz98j1umpklaVtEEQu67QAdSsQfMVgFZjyF2Hq7KAsjqw8nZ8Q9sGa86c8-TeYC4kFcGn4bjUlIpTZ7o06-BMFeEnNweYMrCHRP9ol9y-XvmCD8Pl6cz2btKUCEOs0umzLcM9iE46fC4u55hj-KjR5dx1F05U_rKIXElw3AuzSA/s320/Ekushey%20TV.png"/></a></div>
-
-    
