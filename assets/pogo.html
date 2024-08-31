@@ -1,1 +1,355 @@
 
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Custom Controls with Plyr.io Video Player</title>
+
+  <link rel='stylesheet' href='https://cdn.plyr.io/3.5.6/plyr.css'>
+
+</head>
+
+<body>
+
+<video id="player" controls crossorigin playsinline class="js-player" 
+
+       poster="https://the-media-ant.mo.cloudinary.net/uploads/mediaLogos/1693566124160/10%20Sony%20Sports%20Ten%205%20HD.svg?tx=w_350">
+
+  <!-- HLS ভিডিও ফাইল -->
+
+</video>
+
+<script src='https://cdn.plyr.io/3.5.6/plyr.js'></script>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const controls = [
+
+            'play-large', // The large play button in the center
+
+            'restart', // Restart playback
+
+            'rewind', // Rewind by the seek time (default 10 seconds)
+
+            'play', // Play/pause playback
+
+            'fast-forward', // Fast forward by the seek time (default 10 seconds)
+
+            'progress', // The progress bar and scrubber for playback and buffering
+
+            'current-time', // The current time of playback
+
+            'duration', // The full duration of the media
+
+            'mute', // Toggle mute
+
+            'volume', // Volume control
+
+            'captions', // Toggle captions
+
+            'settings', // Settings menu
+
+            'pip', // Picture-in-picture (currently Safari only)
+
+            'airplay', // Airplay (currently Safari only)
+
+           
+
+            'fullscreen' // Toggle fullscreen
+
+        ];
+
+        const player = new Plyr('#player', { controls });
+
+        if (Hls.isSupported()) {
+
+            const hls = new Hls();
+
+            hls.loadSource('https://humsab.xyz/S_Ten5/index.m3u8');
+
+            hls.attachMedia(document.getElementById('player'));
+
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+
+              player.play();
+
+            });
+
+        } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+
+            player.src = 'https://humsab.xyz/S_Ten5/index.m3u8';
+
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>
+
+
+<hr>
+
+<b><b><b><br><br><br>
+
+
+
+
+<!-- Place this in the Blogger template's <head> section -->
+
+<style>
+
+    @property --i {
+
+        syntax: "<number>";
+
+        inherits: true;
+
+        initial-value: 1; 
+
+    }
+
+    
+
+    html {
+
+        --min: 14px;
+
+        --max: 64px;
+
+        --step: 2px;
+
+        font-size: round(var(--min) + (var(--max) - var(--min))*var(--i),var(--step));
+
+    }
+
+    
+
+    @keyframes i {
+
+        to { --i: 0 }
+
+    }
+
+    input {
+
+        --c: #BD1550; /* slider color */
+
+        --g: 5px;  /* the gap */
+
+        --l: 6px;  /* line thickness */
+
+        --s: 30px; /* thumb size */
+
+        width: 80vh;
+
+        position: fixed;
+
+        top: 10vh;
+
+        left: 5px;
+
+        rotate: 90deg;
+
+        translate: 0 -100%;
+
+        transform-origin: 0 100%;
+
+        height: var(--s); /* needed for Firefox */
+
+        flex: 1;
+
+        --_c: color-mix(in srgb, var(--c), #000 var(--_p,0%));
+
+        appearance :none;
+
+        background: none;
+
+        cursor: pointer;
+
+        overflow: hidden;
+
+        padding: 1px;
+
+    }
+
+    input:focus-visible,
+
+    input:hover {
+
+        --_p: 25%;
+
+    }
+
+    input:active,
+
+    input:focus-visible {
+
+        --_b: var(--s);
+
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+
+        height: var(--s);
+
+        aspect-ratio: 1;
+
+        border-radius: 50%;
+
+        box-shadow: 0 0 0 var(--_b,var(--l)) inset var(--_c);
+
+        border-image: linear-gradient(90deg,var(--_c) 50%,#ababab 0) 0 1/calc(50% - var(--l)/2) 100vh/0 calc(100vh + var(--g));
+
+        -webkit-appearance: none;
+
+        appearance: none;
+
+        transition: .3s;
+
+        view-timeline: --thumb-view inline;
+
+    }
+
+    input[type="range"]::-moz-range-thumb {
+
+        height: var(--s);
+
+        width: var(--s);
+
+        background: none;
+
+        border-radius: 50%;
+
+        box-shadow: 0 0 0 var(--_b,var(--l)) inset var(--_c);
+
+        border-image: linear-gradient(90deg,var(--_c) 50%,#ababab 0) 0 1/calc(50% - var(--l)/2) 100vh/0 calc(100vh + var(--g));
+
+        -moz-appearance: none;
+
+        appearance: none;
+
+        transition: .3s;
+
+        view-timeline: --thumb-view inline;
+
+    }
+
+    body {
+
+        font-family: system-ui, sans-serif;
+
+        background: #eee;
+
+        margin: 0;
+
+    }
+
+    
+
+    h3 {
+
+        font-size: 0.5rem;
+
+    }
+
+    
+
+    p {
+
+        font-size: 0.2rem;
+
+        text-wrap: pretty;
+
+    }
+
+    
+
+    section {
+
+        margin-inline: max(60px, 50% - 400px);
+
+    }
+
+    @supports not (animation-timeline:view()) {
+
+        html {
+
+            font-size: 8px;
+
+        }
+
+        
+
+        input[type="range"] {
+
+            display: none;
+
+        }
+
+    }
+
+</style>
+
+<!-- Place this code in the Blogger template's <body> section where you want the content to appear -->
+
+<input type="range" value="10" title="Adjust the font-size">
+
+<section>
+
+    <h3><br>Sony Sports 5</br></h3>
+
+    <p>Sony Sports 5 is a sports television channel that offers a diverse range of live sports events, sports news, and analysis. The channel is known for broadcasting a variety of international and domestic sports, including cricket, football (soccer), basketball, tennis, and other popular sports. Viewers can enjoy live coverage of major tournaments, league matches, and exclusive sports content.</p>
+
+</section>
+
+<section class="slant">
+
+    <h3>Feature</h3>
+
+    <p>Sony Sports 5 also features in-depth analysis, interviews with athletes, and expert commentary, making it a go-to destination for sports enthusiasts. The channel's programming is designed to cater to a wide audience, offering something for every sports fan.</p>
+
+</section>
+
+<section>
+
+    <h3></h3>
+
+    <p></p>
+
+</section>
+
+<section class="slant alt">
+
+    <h2></h2>
+
+    <p></p>
+
+</section>
+
+<section>
+
+    <h3>Another</h3>
+
+    <p>Sultan Mohammed Arabi</p>
+
+</section><br><br><br>
+
+
+<div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGVkg94S8stWryNrn__iJqJYuAdkhtKwCY4p1hRLKg6NGR2OtX-QKhvPqdJpaCiYlrulQugWvVckCmoXqzHIa2aZjQyD8kIhSbH8JuNY3N-Bj9pK8xpFz8Agq-RQ2yY9kRDEONgBhTD37lYTBEUcwrP6WlanIPrvuFULj45uCAsLCNDXUVOuHsuv3wowg/s350/10%20Sony%20Sports%20Ten%205%20HD.png" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" width="320" data-original-height="146" data-original-width="350" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGVkg94S8stWryNrn__iJqJYuAdkhtKwCY4p1hRLKg6NGR2OtX-QKhvPqdJpaCiYlrulQugWvVckCmoXqzHIa2aZjQyD8kIhSbH8JuNY3N-Bj9pK8xpFz8Agq-RQ2yY9kRDEONgBhTD37lYTBEUcwrP6WlanIPrvuFULj45uCAsLCNDXUVOuHsuv3wowg/s320/10%20Sony%20Sports%20Ten%205%20HD.png"/></a></div>
+
+
+
