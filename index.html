@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,9 @@
             padding: 0;
             background-color: #f9f9f9;
             color: #333;
-            transition: all 0.3s ease;   
+            transition: all 0.3s ease;
+        
+      
         }
         /* Link Styles */
         a {
@@ -374,6 +377,7 @@
             color: #21a1f1;
         }
         
+
         /* Responsive Design */
         @media (max-width: 768px) {
             header {
@@ -432,20 +436,10 @@
             <img src="https://i.ibb.co/09kNcZ5/2f96fe6f-2ca6-4894-a1fc-bb3010233e87-1-all-678.jpg" alt="Headshot" class="headshot">
             <h1>Sultan Muhammad Arabi</h1>
             <h2>Web Developer, Hafiz and Arabic Teacher</h2>
-            <video id="video-player" controls>
-                <source src="https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8" type="application/x-mpegURL">
+            <video controls>
+                <source src="https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-        </div>
-        <div id="channel-list">
-            <h2>Channels</h2>
-            <ul>
-                <li><a href="#" data-url="https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8">Peace TV</a></li>
-                <li><a href="#" data-url="http://217.20.112.199/pogo/index.m3u8">Pogo TV</a></li>
-                <li><a href="#" data-url="http://217.20.112.199/zeetvhd/index.m3u8">Zee TV</a></li>
-                <li><a href="#" data-url="https://example.com/channel4.m3u8">Channel 4</a></li>
-                <!-- Add more channels as needed -->
-            </ul>
         </div>
     </header>
 
@@ -453,11 +447,12 @@
     <nav>
         <ul>
             <li><a href="#home">Home</a></li>
+
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#skills">Skills</a></li>
+
             <li><a href="#contact">Contact</a></li>
-            <li><a href="pogo.html">Home</a></li>
         </ul>
     </nav>
 
@@ -467,15 +462,17 @@
         <p>I am a Hafiz and an Arabic teacher with skills in internet broadband support, web development, and graphic design. I am dedicated to continuous learning and sharing knowledge.</p>
         <div id="skill-cloud">
             <span>Internet Broadband Support</span>
+
             <span>Arabic Teacher</span>
             <span>Web Developer</span>
             <span>Graphic Designer</span>
             <span>Hafiz</span>
+
         </div>
         <button id="theme-toggle">Toggle Dark/Light Mode</button>
     </section>
 
-    <!-- Interactive Portfolio Section -->
+    <!-- Interactive Portfolio Section 📨 assets/images/project1.jpg-->
     <section id="portfolio">
         <h2>Portfolio</h2>
         <div class="portfolio-grid">
@@ -561,7 +558,7 @@
             </div>
             <div class="blog-post">
                 <h3>Nurturing Minds with Hafez and the Role of an Arabic Teacher</h3>
-                <p>In the realm of literature and education, Hafez's poetry resonates deeply with the beauty of the Arabic language and culture. An Arabic teacher plays a crucial role in introducing students to Hafez's works, fostering an appreciation for his lyrical mastery and profound themes. By incorporating Hafez’s poetry into lessons, teachers not only enhance language skills but also connect students with their cultural heritage. These educators spark curiosity and inspire creativity, guiding learners to explore the rich tapestry of Arabic literature. In essence, the passion of an Arabic teacher fuels a love for language, making timeless poets like Hafez come alive in the hearts of their students.</p>
+                <p>In the realm of literature and education, Hafez's poetry resonates deeply with the beauty of the Arabic language and culture. An Arabic teacher plays a crucial role in introducing students to Hafez's works, fostering an appreciation for his lyrical mastery and profound themes. By incorporating Hafez’s poetry into lessons, teachers not only enhance language skills but also connect students with their cultural heritage. These educators spark curiosity and inspire creativity, guiding learners to explore the rich tapestry of Arabic literature. In essence, the passion of an Arabic teacher fuels a love for language, making timeless poets like Hafez come alive in the hearts of their students..</p>
                 <a href="blog-post-link">Read More</a>
             </div>
             <!-- Add more blog posts as needed -->
@@ -593,18 +590,7 @@
             document.body.classList.toggle('dark-mode');
         });
 
-        // Change video source on channel click
-        const channelLinks = document.querySelectorAll('#channel-list a');
-        const videoPlayer = document.getElementById('video-player');
 
-        channelLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent default link behavior
-                const url = this.getAttribute('data-url');
-                videoPlayer.src = url;
-                videoPlayer.play(); // Automatically play the selected channel
-            });
-        });
     </script>
 
 </body>
