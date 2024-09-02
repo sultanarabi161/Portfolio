@@ -188,16 +188,13 @@
         </div>
     </div>
 
-    <!-- Code Editor Tool -->
-    <div class="section code-editor-tool">
-        <h2>Best Code Editor Tool</h2>
-        <div id="editor"> 
-            <h1>Hello, World!</h1>
-            <p>This is a simple HTML code editor.</p>
-        </div>
-        <button onclick="runCode()">Run Code</button>
-        <iframe id="output" frameborder="0"></iframe>
-    </div>
+   <!-- Code Editor Tool -->
+<div class="section code-editor-tool">
+    <h2>Best Code Editor Tool</h2>
+    <div id="editor" style="height: 200px; width: 100%;"></div>
+    <button onclick="runCode()">Run Code</button>
+    <iframe id="output" frameborder="0" style="width: 100%; height: 300px;"></iframe>
+</div>
 
     <!-- IP Search Tool -->
     <div class="section ip-search-tool">
@@ -360,18 +357,21 @@
             });
         }
 
-        // 8. Code Editor Tool
-        const editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.session.setMode("ace/mode/html");
+        
 
-        function runCode() {
-            const code = editor.getValue();
-            const iframe = document.getElementById('output');
-            iframe.contentDocument.open();
-            iframe.contentDocument.write(code);
-            iframe.contentDocument.close();
-        }
+
+        // 8. Initialize Ace Editor
+    const editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/html");
+
+    function runCode() {
+        const code = editor.getValue();
+        const iframe = document.getElementById('output');
+        iframe.contentDocument.open();
+        iframe.contentDocument.write(code);
+        iframe.contentDocument.close();
+    }
 
         // 9. IP Search Tool
         function searchIP() {
