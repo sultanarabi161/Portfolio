@@ -1,3 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Suite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button, input[type="date"] {
+            padding: 10px 15px;
+            margin-top: 10px;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+        }
+        .fake-info {
+            border: 1px solid #4CAF50;
+            background-color: #f9fff9;
+        }
+        .birthday-wish {
+            border: 1px solid #2196F3;
+            background-color: #f0faff;
+        }
+        .age-calculator {
+            border: 1px solid #FF9800;
+            background-color: #fff8f0;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>All-in-One Tool Suite</h1>
+    
+    <div class="section fake-info">
+        <h2>Fake Info Generator</h2>
+        <button onclick="generateFakeInfo()">Generate Info</button>
+        <div id="fakeInfo" class="output"></div>
+    </div>
+    
+    <div class="section birthday-wish">
+        <h2>Birthday Wish Generator</h2>
+        <input type="date" id="birthdate">
+        <button onclick="generateBirthdayWish()">Generate Wish</button>
+        <div id="birthdayWish" class="output"></div>
+    </div>
+    
+    <div class="section age-calculator">
+        <h2>Age Calculator Tool</h2>
+        <input type="date" id="dob">
+        <button onclick="calculateAge()">Calculate Age</button>
+        <div id="age" class="output"></div>
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+        const names = ["John Doe", "Jane Smith", "Michael Brown", "Alice Johnson"];
+        const addresses = ["123 Main St, Springfield", "456 Elm St, Metropolis", "789 Oak St, Gotham", "101 Maple Ave, Star City"];
+
+        function generateFakeInfo() {
+            const name = names[Math.floor(Math.random() * names.length)];
+            const address = addresses[Math.floor(Math.random() * addresses.length)];
+            const info = `Name: ${name}<br>Address: ${address}`;
+            document.getElementById('fakeInfo').innerHTML = info;
+        }
+        
+        function generateBirthdayWish() {
+            const birthdateInput = document.getElementById('birthdate').value;
+            if (!birthdateInput) {
+                document.getElementById('birthdayWish').innerText = "Please select a birthdate.";
+                return;
+            }
+            const birthdate = new Date(birthdateInput);
+            const today = new Date();
+            let age = today.getFullYear() - birthdate.getFullYear();
+            const m = today.getMonth() - birthdate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+                age--;
+            }
+            const message = `Happy Birthday! You are ${age} years old today.`;
+            document.getElementById('birthdayWish').innerHTML = message;
+        }
+
+        function calculateAge() {
+            const dobInput = document.getElementById('dob').value;
+            if (!dobInput) {
+                document.getElementById('age').innerText = "Please select a date of birth.";
+                return;
+            }
+            const dob = new Date(dobInput);
+            const diff = Date.now() - dob.getTime();
+            const ageDate = new Date(diff);
+            const year = ageDate.getUTCFullYear() - 1970;
+            document.getElementById('age').innerHTML = `You are ${year} years old.`;
+        }
+    </script>
+</body>
+</html>
+
 
 
 <!DOCTYPE html>
@@ -5,593 +119,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Tool Suite</title>
     <style>
-        /* Global Styles */
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-            transition: all 0.3s ease;
-        
-      
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
-        /* Link Styles */
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        section {
-            padding: 50px 20px;
-            text-align: center;
-        }
-        h2 {
-            margin-bottom: 20px;
-            font-size: 2.5rem;
-            color: #333;
-        }
-
-        /* Header Section */
-        header {
+        button, input[type="number"], input[type="text"] {
+            padding: 10px;
+            margin-top: 10px;
             width: 100%;
-            background-color: #282c34;
-            color: white;
-            text-align: center;
-            padding: 50px 0;
-        }
-        h1 {
-            margin: 20px 0 10px;
-            font-size: 3rem;
-        }
-        h2 {
-            margin: 10px 0;
-            font-weight: normal;
-            color: #61dafb;
-        }
-        img.headshot {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            margin: 30px;
-        }
-        video {
-            margin-top: 20px;
-            width: 70%;
-            max-width: 600px;
-            border-radius: 10px;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(40, 44, 52, 0.9);
-            padding: 10px 0;
-            z-index: 1000;
-            transition: background 0.3s ease;
-        }
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        nav ul li {
-            margin: 0 20px;
-        }
-        nav ul li a {
-            font-size: 1rem;
-            color: white;
-            font-weight: bold;
-        }
-        nav ul li a:hover {
-            color: #61dafb;
-        }
-
-        /* About Me Section */
-        #about {
-            background-color: #f0f0f0;
-        }
-        #skill-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        #skill-cloud span {
-            background-color: #61dafb;
-            color: white;
-            margin: 10px;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 1rem;
-            transition: transform 0.2s ease;
-        }
-        #skill-cloud span:hover {
-            transform: scale(1.1);
-        }
-        #theme-toggle {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #61dafb;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Portfolio Section */
-        #portfolio {
-            background-color: #fff;
-        }
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .portfolio-item img {
-            width: 100%;
-            transition: transform 0.5s ease;
-        }
-        .portfolio-item:hover img {
-            transform: scale(1.1);
-        }
-        .portfolio-item .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-        }
-        .portfolio-item:hover .overlay {
-            opacity: 1;
-        }
-
-        /* Experience Section */
-        #experience {
-            background-color: #f0f0f0;
-        }
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background-color: #61dafb;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-        }
-        .timeline-item {
-            padding: 20px 30px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
             box-sizing: border-box;
         }
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -13px;
-            background-color: white;
-            border: 4px solid #61dafb;
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-        .timeline-item.left {
-            left: 0;
-        }
-        .timeline-item.right {
-            left: 50%;
-        }
-        .timeline-item.left::after {
-            left: -13px;
-        }
-        .timeline-item.right::after {
-            left: -13px;
-        }
-        .timeline-item-content {
+        .section {
+            margin-bottom: 40px;
             padding: 20px;
-            background-color: white;
-            position: relative;
-            border-radius: 6px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
         }
-        .timeline-item-content h3 {
-            margin-top: 0;
-            color: #61dafb;
+        .password-generator {
+            border: 1px solid #4CAF50;
+            background-color: #f9fff9;
         }
-        .timeline-item-content p {
-            margin: 10px 0;
-            font-size: 1rem;
+        .bin-generator {
+            border: 1px solid #2196F3;
+            background-color: #f0faff;
         }
-
-        /* Skills Section */
-        #skills {
-            background-color: #fff;
+        .qr-code-generator {
+            border: 1px solid #FF9800;
+            background-color: #fff8f0;
         }
-        .skills-icons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .skills-icons i {
-            font-size: 3rem;
-            color: #333;
-            transition: color 0.3s ease;
-        }
-        .skills-icons i:hover {
-            color: #61dafb;
-        }
-
-        /* Resources Section */
-        #resources {
-            background-color: #f0f0f0;
-        }
-        .resources-list {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .resource-item {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        .resource-item:hover {
-            transform: scale(1.05);
-        }
-
-        /* Blog Section */
-        #blog {
-            background-color: #fff;
-        }
-        .blog-posts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .blog-post {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 20px;
-            transition: transform 0.3s ease;
-        }
-        .blog-post:hover {
-            transform: translateY(-10px);
-        }
-        .blog-post h3 {
-            color: #61dafb;
-        }
-
-        /* Contact Me Section */
-        #contact {
-            background-color: #f0f0f0;
-        }
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-        }
-        form input, form textarea {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        form button {
-            padding: 15px;
-            background-color: #61dafb;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-        form button:hover {
-            background-color: #21a1f1;
-        }
-
-        /* Social Media Icons */
-        .social-icons {
+        .output {
             margin-top: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .social-icons a {
-            margin: 0 15px;
+            font-size: 18px;
+            word-wrap: break-word;
             color: #333;
-            font-size: 2rem;
-            transition: color 0.3s ease;
-        }
-        .social-icons a:hover {
-            color: #61dafb;
-        }
-
-        /* Dark Mode */
-        .dark-mode {
-            background-color: #333;
-            color: white;
-        }
-        .dark-mode header {
-            background-color: #1c1f25;
-        }
-        .dark-mode nav {
-            background: rgba(28, 31, 37, 0.9);
-        }
-        .dark-mode #theme-toggle {
-            background-color: #282c34;
-        }
-        .dark-mode .portfolio-item .overlay {
-            background-color: rgba(0, 0, 0, 0.9);
-        }
-        .dark-mode .timeline::after {
-            background-color: #21a1f1;
-        }
-        .dark-mode .skills-icons i {
-            color: #ccc;
-        }
-        .dark-mode .skills-icons i:hover {
-            color: #21a1f1;
-        }
-        
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header {
-                padding: 30px 0;
-            }
-            h1 {
-                font-size: 2.5rem;
-            }
-            h2 {
-                font-size: 1.5rem;
-            }
-            video {
-                width: 90%;
-            }
-            nav ul li {
-                margin: 0 10px;
-            }
-            .timeline-item {
-                width: 100%;
-                left: 0 !important;
-                padding-left: 40px;
-            }
-            .timeline-item::after {
-                left: 20px !important;
-            }
-            .timeline-item.right {
-                left: 0 !important;
-            }
-            form input, form textarea {
-                font-size: 0.9rem;
-            }
-            form button {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .social-icons a {
-                font-size: 1.5rem;
-                margin: 0 10px;
-            }
-            header h1 {
-                font-size: 1.8rem;
-            }
-            header h2 {
-                font-size: 1.2rem;
-            }
         }
     </style>
 </head>
 <body>
+    <h1>All-in-One Tool Suite</h1>
+    
+    <div class="section password-generator">
+        <h2>Password Generator Tool</h2>
+        <label for="length">Password Length:</label>
+        <input type="number" id="length" value="8" min="4" max="32">
+        <button onclick="generatePassword()">Generate Password</button>
+        <div id="password" class="output"></div>
+    </div>
+    
+    <div class="section bin-generator">
+        <h2>BIN Generator Tool</h2>
+        <button onclick="generateBIN()">Generate BIN</button>
+        <div id="bin" class="output"></div>
+    </div>
+    
+    <div class="section qr-code-generator">
+        <h2>Link to QR Code Generator</h2>
+        <input type="text" id="url" placeholder="Enter your URL here">
+        <button onclick="generateQRCode()">Generate QR Code</button>
+        <div id="qrcode" class="output"></div>
+    </div>
 
-    <!-- Header Section -->
-    <header id="home">
-        <div class="header-container">
-            <img src="https://i.ibb.co/09kNcZ5/2f96fe6f-2ca6-4894-a1fc-bb3010233e87-1-all-678.jpg" alt="Headshot" class="headshot">
-            <h1>Sultan Muhammad Arabi</h1>
-            <h2>Web Developer, Hafiz and Arabic Teacher</h2>
-            <video controls>
-                <source src="https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </header>
-
-    <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <!-- About Me Section -->
-    <section id="about">
-        <h2>About Me</h2>
-        <p>I am a Hafiz and an Arabic teacher with skills in internet broadband support, web development, and graphic design. I am dedicated to continuous learning and sharing knowledge.</p>
-        <div id="skill-cloud">
-            <span>Internet Broadband Support</span>
-
-            <span>Arabic Teacher</span>
-            <span>Web Developer</span>
-            <span>Graphic Designer</span>
-            <span>Hafiz</span>
-
-        </div>
-        <button id="theme-toggle">Toggle Dark/Light Mode</button>
-    </section>
-
-    <!-- Interactive Portfolio Section 📨 assets/images/project1.jpg-->
-    <section id="portfolio">
-        <h2>Portfolio</h2>
-        <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <img src="https://i.ibb.co/GRZVK0s/1000007366.png" alt="Project 1">
-                <div class="overlay">
-                    <p>Project 1 Description</p>
-                    <a href="video-demo-link" target="_blank">Watch Demo</a>
-                </div>
-            </div>
-            <div class="portfolio-item">
-                <img src="https://i.ibb.co/09kNcZ5/2f96fe6f-2ca6-4894-a1fc-bb3010233e87-1-all-678.jpg" alt="Project 2">
-                <div class="overlay">
-                    <p>Project 2 Description</p>
-                    <a href="video-demo-link" target="_blank">Watch Demo</a>
-                </div>
-            </div>
-            <!-- Add more portfolio items as needed -->
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience">
-        <h2>Experience</h2>
-        <div class="timeline">
-            <div class="timeline-item left">
-                <div class="timeline-item-content">
-                    <h3>Hifz Madrasa</h3>
-                    <p>Teacher</p>
-                    <span>Current</span>
-                </div>
-            </div>
-            <div class="timeline-item right">
-                <div class="timeline-item-content">
-                    <h3>Internet Broadband Office</h3>
-                    <p>Support Holder and Support Engineer</p>
-                    <span>Current</span>
-                </div>
-            </div>
-            <!-- Add more timeline items as needed -->
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2>Skills</h2>
-        <div class="skills-icons">
-            <i class="fab fa-html5"></i>
-            <i class="fab fa-css3-alt"></i>
-            <i class="fab fa-js"></i>
-            <i class="fab fa-react"></i>
-            <i class="fab fa-node-js"></i>
-            <!-- Add more skill icons as needed -->
-        </div>
-    </section>
-
-    <!-- Resources Section -->
-    <section id="resources">
-        <h2>Resources</h2>
-        <div class="resources-list">
-            <div class="resource-item">
-                <h3>Template 1</h3>
-                <p>Download this template for free!</p>
-                <a href="download-link" download>Download</a>
-            </div>
-            <div class="resource-item">
-                <h3>Code Snippet 1</h3>
-                <p>Use this code snippet in your projects.</p>
-                <a href="download-link" download>Download</a>
-            </div>
-            <!-- Add more resource items as needed -->
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog">
-        <h2>Blog</h2>
-        <div class="blog-posts">
-            <div class="blog-post">
-                <h3>The Backbone of Customer Satisfaction</h3>
-                <p>In the world of technology, customer service holders and support engineers play vital roles in ensuring user satisfaction. Customer service holders are the first point of contact, addressing inquiries and concerns with empathy and efficiency. When issues become complex, support engineers step in with their technical expertise to troubleshoot and resolve problems. Together, they form a dynamic duo that enhances the customer experience by providing prompt solutions and valuable feedback for product improvement. Their collaborative efforts not only build brand loyalty but also contribute to a positive reputation in the market. In an era where customer experience is paramount, these professionals are true unsung heroes of the tech industry.</p>
-                <a href="blog-post-link">Read More</a>
-            </div>
-            <div class="blog-post">
-                <h3>Nurturing Minds with Hafez and the Role of an Arabic Teacher</h3>
-                <p>In the realm of literature and education, Hafez's poetry resonates deeply with the beauty of the Arabic language and culture. An Arabic teacher plays a crucial role in introducing students to Hafez's works, fostering an appreciation for his lyrical mastery and profound themes. By incorporating Hafez’s poetry into lessons, teachers not only enhance language skills but also connect students with their cultural heritage. These educators spark curiosity and inspire creativity, guiding learners to explore the rich tapestry of Arabic literature. In essence, the passion of an Arabic teacher fuels a love for language, making timeless poets like Hafez come alive in the hearts of their students..</p>
-                <a href="blog-post-link">Read More</a>
-            </div>
-            <!-- Add more blog posts as needed -->
-        </div>
-    </section>
-
-    <!-- Contact Me Section -->
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Email: <a href="mailto:sultanarabi161@gmail.com">sultanarabi161@gmail.com</a></p>
-        <p>Phone: <a href="tel:01780982161">01780982161</a></p>
-        <form>
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <div class="social-icons">
-            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-        </div>
-    </section>
-
-    <!-- JavaScript for Interactivity -->
+    <!-- Include the qrcode.min.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <script>
-        // Toggle Dark/Light Mode
-        document.getElementById('theme-toggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
+        function generatePassword() {
+            const length = document.getElementById('length').value;
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('password').innerHTML = `Your Password: ${password}`;
+        }
+
+        function generateBIN() {
+            const bin = Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('bin').innerHTML = `Generated BIN: ${bin}`;
+        }
+
+        function generateQRCode() {
+            const url = document.getElementById('url').value;
+            if (url) {
+                document.getElementById('qrcode').innerHTML = "";
+                const qr = qrcode(0, 'L');
+                qr.addData(url);
+                qr.make();
+                document.getElementById('qrcode').innerHTML = qr.createImgTag();
+            } else {
+                alert("Please enter a valid URL");
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Tool Suite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="color"], input[type="text"], button {
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+        }
+        .hex-color-tool {
+            border: 1px solid #FF5722;
+            background-color: #fff3e0;
+        }
+        .code-editor-tool {
+            border: 1px solid #4CAF50;
+            background-color: #f9fff9;
+        }
+        .ip-search-tool {
+            border: 1px solid #2196F3;
+            background-color: #f0faff;
+        }
+        #colorDisplay, #ipInfo, #output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #hexCode, #editor {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        #copyButton {
+            display: none;
+            padding: 8px;
+            margin-top: 10px;
+        }
+        #editor {
+            height: 300px;
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+        #iframe {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>All-in-One Tool Suite</h1>
+    
+    <!-- Hex Color Tool -->
+    <div class="section hex-color-tool">
+        <h2>Hex Colors Code Tool</h2>
+        <input type="color" id="colorPicker">
+        <button onclick="showHexCode()">Show HEX Code</button>
+        <div id="colorDisplay">
+            <p id="hexCode"></p>
+            <button id="copyButton" onclick="copyHexCode()">Copy HEX Code</button>
+        </div>
+    </div>
+
+    <!-- Code Editor Tool -->
+    <div class="section code-editor-tool">
+        <h2>Best Code Editor Tool</h2>
+        <div id="editor"> 
+            <!-- Default HTML code -->
+            <h1>Hello, World!</h1>
+            <p>This is a simple HTML code editor.</p>
+        </div>
+        <button onclick="runCode()">Run Code</button>
+        <iframe id="output" frameborder="0"></iframe>
+    </div>
+
+    <!-- IP Search Tool -->
+    <div class="section ip-search-tool">
+        <h2>IP Search Tool</h2>
+        <input type="text" id="ipInput" placeholder="Enter IP address">
+        <button onclick="searchIP()">Search IP</button>
+        <div id="ipInfo"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script>
+        // Hex Color Tool
+        function showHexCode() {
+            const color = document.getElementById('colorPicker').value;
+            const hexCodeElement = document.getElementById('hexCode');
+            hexCodeElement.innerText = `HEX Code: ${color}`;
+            document.getElementById('copyButton').style.display = 'block';
+        }
+
+        function copyHexCode() {
+            const hexCode = document.getElementById('hexCode').innerText.replace('HEX Code: ', '');
+            navigator.clipboard.writeText(hexCode).then(() => {
+                alert("HEX Code copied to clipboard!");
+            });
+        }
+
+        // Code Editor Tool
+        const editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/html");
+
+        function runCode() {
+            const code = editor.getValue();
+            const iframe = document.getElementById('output');
+            iframe.contentDocument.open();
+            iframe.contentDocument.write(code);
+            iframe.contentDocument.close();
+        }
+
+        // IP Search Tool
+        function searchIP() {
+            const ip = document.getElementById('ipInput').value;
+            const apiKey = 'YOUR_API_KEY'; // Replace with your actual IPinfo API Key
+            
+            if (ip) {
+                fetch(`https://ipinfo.io/${ip}/json?token=${apiKey}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        displayIPInfo(data);
+                    })
+                    .catch(error => {
+                        alert("Failed to fetch IP information. Please check the IP address and try again.");
+                    });
+            } else {
+                alert("Please enter a valid IP address");
+            }
+        }
+
+        function displayIPInfo(data) {
+            const ipInfoDiv = document.getElementById('ipInfo');
+            ipInfoDiv.innerHTML = `
+                <p><strong>IP:</strong> ${data.ip}</p>
+                <p><strong>City:</strong> ${data.city}</p>
+                <p><strong>Region:</strong> ${data.region}</p>
+                <p><strong>Country:</strong> ${data.country}</p>
+                <p><strong>Location:</strong> ${data.loc}</p>
+                <p><strong>Organization:</strong> ${data.org}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Utility Suite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="file"], button {
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+        }
+        .jpg-to-zip-tool {
+            border: 1px solid #4CAF50;
+            background-color: #f9fff9;
+        }
+        .ip-tool {
+            border: 1px solid #FF9800;
+            background-color: #fff8f0;
+        }
+        .url-generator-tool {
+            border: 1px solid #2196F3;
+            background-color: #f0faff;
+        }
+        #downloadLink, #ipDisplay, #urlDisplay {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>All-in-One Utility Suite</h1>
+    
+    <!-- JPG to ZIP Tool -->
+    <div class="section jpg-to-zip-tool">
+        <h2>JPG to ZIP Tool</h2>
+        <input type="file" id="fileInput" accept=".jpg, .jpeg" multiple>
+        <button onclick="convertToZip()">Convert to ZIP</button>
+        <div id="downloadLink"></div>
+    </div>
+
+    <!-- What is My IP Tool -->
+    <div class="section ip-tool">
+        <h2>What is My IP?</h2>
+        <button onclick="getMyIP()">Get My IP</button>
+        <div id="ipDisplay"></div>
+    </div>
+
+    <!-- Photo to Real URL Generator -->
+    <div class="section url-generator-tool">
+        <h2>Photo to Real URL Generator</h2>
+        <input type="file" id="photoInput" accept="image/*">
+        <button onclick="uploadPhoto()">Upload Photo</button>
+        <div id="urlDisplay"></div>
+    </div>
+
+    <!-- Include JSZip and JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
+    <script>
+        // JPG to ZIP Tool
+        function convertToZip() {
+            const files = document.getElementById('fileInput').files;
+            const zip = new JSZip();
+            const folder = zip.folder("images");
+
+            if (files.length > 0) {
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        folder.file(file.name, e.target.result.split(',')[1], {base64: true});
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                setTimeout(() => {
+                    zip.generateAsync({type: "blob"}).then(function(content) {
+                        const downloadLink = document.createElement("a");
+                        downloadLink.href = URL.createObjectURL(content);
+                        downloadLink.download = "images.zip";
+                        downloadLink.innerText = "Download ZIP";
+                        document.getElementById("downloadLink").appendChild(downloadLink);
+                    });
+                }, 1000);
+            } else {
+                alert("Please select JPG files to convert");
+            }
+        }
+
+        // What is My IP Tool
+        function getMyIP() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ipDisplay').innerText = `Your IP Address: ${data.ip}`;
+                })
+                .catch(error => {
+                    alert("Failed to fetch IP address. Please try again.");
+                });
+        }
+
+        // Photo to Real URL Generator
+        function uploadPhoto() {
+            const photo = document.getElementById('photoInput').files[0];
+            if (photo) {
+                const formData = new FormData();
+                formData.append('image', photo);
+
+                fetch('https://api.imgbb.com/1/upload?key=YOUR_API_KEY', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const url = data.data.url;
+                    document.getElementById('urlDisplay').innerHTML = `Uploaded Image URL: <a href="${url}" target="_blank">${url}</a>`;
+                })
+                .catch(error => {
+                    alert("Failed to upload image. Please try again.");
+                });
+            } else {
+                alert("Please select an image to upload");
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Utility Suite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        textarea, input[type="text"], input[type="file"], button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        #result, #keywords {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        #canvas {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            display: block;
+        }
+
+        #controls button {
+            width: 32%;
+            margin-right: 2%;
+            margin-bottom: 10px;
+        }
+        
+        #controls button:last-child {
+            margin-right: 0;
+        }
+
+        .word-tracker-tool {
+            border: 1px solid #4CAF50;
+            background-color: #e8f5e9;
+        }
+
+        .keyword-finder-tool {
+            border: 1px solid #FF9800;
+            background-color: #fff3e0;
+        }
+
+        .photo-editor-tool {
+            border: 1px solid #2196F3;
+            background-color: #e3f2fd;
+        }
+
+        #downloadBtn {
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>All-in-One Utility Suite</h1>
+
+    <!-- Word Tracker Tool -->
+    <div class="section word-tracker-tool">
+        <h2>Word Tracker Tool</h2>
+        <textarea id="textInput" placeholder="Enter text here..."></textarea>
+        <input type="text" id="wordInput" placeholder="Enter word to track">
+        <button onclick="trackWord()">Track Word</button>
+        <div id="result"></div>
+    </div>
+
+    <!-- Keyword Finder Tool -->
+    <div class="section keyword-finder-tool">
+        <h2>Keyword Finder Tool</h2>
+        <input type="text" id="urlInput" placeholder="Enter URL">
+        <button onclick="findKeywords()">Find Keywords</button>
+        <div id="keywords"></div>
+    </div>
+
+    <!-- Photo Editor Tool -->
+    <div class="section photo-editor-tool">
+        <h2>Photo Editor Tool</h2>
+        <input type="file" id="photoInput" accept="image/*">
+        <canvas id="canvas"></canvas>
+        <div id="controls">
+            <button onclick="applyFilter('grayscale')">Grayscale</button>
+            <button onclick="applyFilter('sepia')">Sepia</button>
+            <button onclick="applyFilter('brightness(1.5)')">Brightness</button>
+            <button onclick="applyFilter('contrast(1.5)')">Contrast</button>
+            <button onclick="applyFilter('blur(5px)')">Blur</button>
+            <button onclick="resizeImage()">Resize</button>
+        </div>
+        <button id="downloadBtn" onclick="downloadImage()">Download Image</button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Word Tracker Tool
+        function trackWord() {
+            const text = document.getElementById('textInput').value;
+            const word = document.getElementById('wordInput').value.trim().toLowerCase();
+
+            if (text && word) {
+                const wordArray = text.toLowerCase().split(/\s+/);
+                const wordCount = wordArray.filter(item => item === word).length;
+
+                document.getElementById('result').innerText = `"${word}" appears ${wordCount} time(s) in the text.`;
+            } else {
+                alert("Please enter both text and word to track.");
+            }
+        }
+
+        // Keyword Finder Tool
+        function findKeywords() {
+            const url = document.getElementById('urlInput').value.trim();
+
+            if (url) {
+                fetch(`https://api.textanalysis.com/keyword-extraction?url=${encodeURIComponent(url)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const keywords = data.keywords.join(', ');
+                        document.getElementById('keywords').innerText = `Keywords: ${keywords}`;
+                    })
+                    .catch(error => {
+                        alert("Failed to fetch keywords. Please check the URL and try again.");
+                    });
+            } else {
+                alert("Please enter a valid URL.");
+            }
+        }
+
+        // Photo Editor Tool
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        let img = new Image();
+
+        document.getElementById('photoInput').addEventListener('change', function(e) {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                img.onload = function() {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                }
+                img.src = event.target.result;
+            }
+            reader.readAsDataURL(e.target.files[0]);
         });
 
+        function applyFilter(filter) {
+            ctx.filter = filter;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        }
 
+        function resizeImage() {
+            const newWidth = canvas.width / 2;
+            const newHeight = canvas.height / 2;
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+            ctx.drawImage(img, 0, 0, newWidth, newHeight);
+        }
+
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'edited_image.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
     </script>
-
 </body>
 </html>
