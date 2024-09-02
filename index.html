@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,74 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
             background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: blue;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header img {
+            max-height: 50px;
+            margin-right: 15px;
+        }
+
+        header .site-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        header .search-bar input[type="text"] {
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        header .search-bar button {
+            background-color: white;
+            color: #4CAF50;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            margin: 20px;
         }
 
         .section {
@@ -19,7 +86,12 @@
             background-color: #fff;
         }
 
-        textarea, input[type="text"], input[type="file"], input[type="number"], button {
+        textarea,
+        input[type="text"],
+        input[type="file"],
+        input[type="number"],
+        input[type="date"],
+        button {
             width: 100%;
             padding: 10px;
             margin-top: 10px;
@@ -45,7 +117,7 @@
             border: 1px solid #ccc;
             display: block;
         }
-
+        
         #controls button {
             width: 32%;
             margin-right: 2%;
@@ -69,14 +141,17 @@
             border: 1px solid #4CAF50;
             background-color: #f9fff9;
         }
+
         .birthday-wish {
             border: 1px solid #2196F3;
             background-color: #f0faff;
         }
+
         .age-calculator {
             border: 1px solid #FF9800;
             background-color: #fff8f0;
         }
+        
         .password-generator {
             border: 1px solid #4CAF50;
             background-color: #f9fff9;
@@ -125,35 +200,109 @@
             border: 1px solid #2196F3;
             background-color: #e3f2fd;
         }
+        
+        
+        
+
+        footer {
+            background-color: #258;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 0.2pc;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header img {
+                margin-bottom: 10px;
+            }
+
+            header .site-title {
+                font-size: 20px;
+            }
+
+            header .search-bar {
+                width: 100%;
+            }
+
+            header .search-bar input[type="text"],
+            header .search-bar button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            nav {
+                text-align: left;
+                padding: 10px 20px;
+            }
+
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <h1>All-in-One Utility Suite</h1>
+    <header>
+        <div class="branding">
+            <img src="https://i.ibb.co/cvMdQ4Y/1000007502.jpg" alt="Site Logo">
+            <span class="site-title">Cracker Tools</span>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search tools...">
+            <button>Search</button>
+        </div>
+    </header>
 
-    <!-- Fake Info Generator -->
-    <div class="section fake-info">
-        <h2>Fake Info Generator</h2>
-        <button onclick="generateFakeInfo()">Generate Info</button>
-        <div id="fakeInfo" class="output"></div>
-    </div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Tools</a>
+        <a href="#">Contact</a>
+    </nav>
 
-    <!-- Birthday Wish Generator -->
-    <div class="section birthday-wish">
-        <h2>Birthday Wish Generator</h2>
-        <input type="date" id="birthdate">
-        <button onclick="generateBirthdayWish()">Generate Wish</button>
-        <div id="birthdayWish" class="output"></div>
-    </div>
+    <div class="container">
+        <! 1 .-- Fake Info Generator -->
+        <div class="section fake-info">
+            <h2>Fake Info Generator</h2>
+            <button onclick="generateFakeInfo()">Generate Info</button>
+            <div id="fakeInfo" class="output"></div>
+        </div>
 
-    <!-- Age Calculator Tool -->
-    <div class="section age-calculator">
-        <h2>Age Calculator Tool</h2>
-        <input type="date" id="dob">
-        <button onclick="calculateAge()">Calculate Age</button>
-        <div id="age" class="output"></div>
-    </div>
+        <! 2 .-- Birthday Wish Generator -->
+        <div class="section birthday-wish">
+            <h2>Birthday Wish Generator</h2>
+            <input type="date" id="birthdate">
+            <button onclick="generateBirthdayWish()">Generate Wish</button>
+            <div id="birthdayWish" class="output"></div>
+        </div>
 
-    <!-- Password Generator Tool -->
+        <! 3 .-- Age Calculator Tool -->
+        <div class="section age-calculator">
+            <h2>Age Calculator Tool</h2>
+            <input type="date" id="dob">
+            <button onclick="calculateAge()">Calculate Age</button>
+            <div id="age" class="output"></div>
+        </div>
+        
+        <!-- Password Generator Tool -->
     <div class="section password-generator">
         <h2>Password Generator Tool</h2>
         <label for="length">Password Length:</label>
@@ -188,13 +337,16 @@
         </div>
     </div>
 
-   <!-- Code Editor Tool -->
-<div class="section code-editor-tool">
-    <h2>Best Code Editor Tool</h2>
-    <div id="editor" style="height: 200px; width: 100%;"></div>
-    <button onclick="runCode()">Run Code</button>
-    <iframe id="output" frameborder="0" style="width: 100%; height: 300px;"></iframe>
-</div>
+    <!-- Code Editor Tool -->
+    <div class="section code-editor-tool">
+        <h2>Best Code Editor Tool</h2>
+        <div id="editor"> 
+            <h1>Hello, World!</h1>
+            <p>This is a simple HTML code editor.</p>
+        </div>
+        <button onclick="runCode()">Run Code</button>
+        <iframe id="output" frameborder="0"></iframe>
+    </div>
 
     <!-- IP Search Tool -->
     <div class="section ip-search-tool">
@@ -259,6 +411,26 @@
         </div>
         <button id="downloadBtn" onclick="downloadImage()">Download Image</button>
     </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Cracker Tools Zone. All rights reserved.</p>
+        <p>Developed by <a href="#">Cracker Sultan</a></p>
+        <p>Follow us on
+            <a href="#">Facebook</a>,
+            <a href="#">Twitter</a>,
+            <a href="#">LinkedIn</a>
+        </p>
+    </footer>
 
     <!-- Include external libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -310,7 +482,7 @@
             const year = ageDate.getUTCFullYear() - 1970;
             document.getElementById('age').innerHTML = `You are ${year} years old.`;
         }
-
+        
         // 4. Password Generator Tool
         function generatePassword() {
             const length = document.getElementById('length').value;
@@ -357,21 +529,18 @@
             });
         }
 
-        
+        // 8. Code Editor Tool
+        const editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/html");
 
-
-        // 8. Initialize Ace Editor
-    const editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/html");
-
-    function runCode() {
-        const code = editor.getValue();
-        const iframe = document.getElementById('output');
-        iframe.contentDocument.open();
-        iframe.contentDocument.write(code);
-        iframe.contentDocument.close();
-    }
+        function runCode() {
+            const code = editor.getValue();
+            const iframe = document.getElementById('output');
+            iframe.contentDocument.open();
+            iframe.contentDocument.write(code);
+            iframe.contentDocument.close();
+        }
 
         // 9. IP Search Tool
         function searchIP() {
@@ -565,7 +734,8 @@
             link.href = canvas.toDataURL();
             link.click();
         }
+        
     </script>
 </body>
-</html>
 
+</html>
