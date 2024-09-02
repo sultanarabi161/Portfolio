@@ -3,22 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tool Suite</title>
+    <title>All-in-One Utility Suite</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f9f9f9;
         }
-        button, input[type="date"] {
-            padding: 10px 15px;
-            margin-top: 10px;
-        }
+
         .section {
             margin-bottom: 40px;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
         }
+
+        textarea, input[type="text"], input[type="file"], input[type="number"], button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        #canvas {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            display: block;
+        }
+
+        #controls button {
+            width: 32%;
+            margin-right: 2%;
+            margin-bottom: 10px;
+        }
+        
+        #controls button:last-child {
+            margin-right: 0;
+        }
+
+        #downloadBtn {
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Additional styles for sections */
         .fake-info {
             border: 1px solid #4CAF50;
             background-color: #f9fff9;
@@ -30,112 +76,6 @@
         .age-calculator {
             border: 1px solid #FF9800;
             background-color: #fff8f0;
-        }
-        .output {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #333;
-        }
-    </style>
-</head>
-<body>
-    <h1>All-in-One Tool Suite</h1>
-    
-    <div class="section fake-info">
-        <h2>Fake Info Generator</h2>
-        <button onclick="generateFakeInfo()">Generate Info</button>
-        <div id="fakeInfo" class="output"></div>
-    </div>
-    
-    <div class="section birthday-wish">
-        <h2>Birthday Wish Generator</h2>
-        <input type="date" id="birthdate">
-        <button onclick="generateBirthdayWish()">Generate Wish</button>
-        <div id="birthdayWish" class="output"></div>
-    </div>
-    
-    <div class="section age-calculator">
-        <h2>Age Calculator Tool</h2>
-        <input type="date" id="dob">
-        <button onclick="calculateAge()">Calculate Age</button>
-        <div id="age" class="output"></div>
-    </div>
-
-
-
-
-
-
-
-
-    <script>
-        const names = ["John Doe", "Jane Smith", "Michael Brown", "Alice Johnson"];
-        const addresses = ["123 Main St, Springfield", "456 Elm St, Metropolis", "789 Oak St, Gotham", "101 Maple Ave, Star City"];
-
-        function generateFakeInfo() {
-            const name = names[Math.floor(Math.random() * names.length)];
-            const address = addresses[Math.floor(Math.random() * addresses.length)];
-            const info = `Name: ${name}<br>Address: ${address}`;
-            document.getElementById('fakeInfo').innerHTML = info;
-        }
-        
-        function generateBirthdayWish() {
-            const birthdateInput = document.getElementById('birthdate').value;
-            if (!birthdateInput) {
-                document.getElementById('birthdayWish').innerText = "Please select a birthdate.";
-                return;
-            }
-            const birthdate = new Date(birthdateInput);
-            const today = new Date();
-            let age = today.getFullYear() - birthdate.getFullYear();
-            const m = today.getMonth() - birthdate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
-                age--;
-            }
-            const message = `Happy Birthday! You are ${age} years old today.`;
-            document.getElementById('birthdayWish').innerHTML = message;
-        }
-
-        function calculateAge() {
-            const dobInput = document.getElementById('dob').value;
-            if (!dobInput) {
-                document.getElementById('age').innerText = "Please select a date of birth.";
-                return;
-            }
-            const dob = new Date(dobInput);
-            const diff = Date.now() - dob.getTime();
-            const ageDate = new Date(diff);
-            const year = ageDate.getUTCFullYear() - 1970;
-            document.getElementById('age').innerHTML = `You are ${year} years old.`;
-        }
-    </script>
-</body>
-</html>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tool Suite</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        button, input[type="number"], input[type="text"] {
-            padding: 10px;
-            margin-top: 10px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .section {
-            margin-bottom: 40px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
         }
         .password-generator {
             border: 1px solid #4CAF50;
@@ -149,99 +89,6 @@
             border: 1px solid #FF9800;
             background-color: #fff8f0;
         }
-        .output {
-            margin-top: 20px;
-            font-size: 18px;
-            word-wrap: break-word;
-            color: #333;
-        }
-    </style>
-</head>
-<body>
-    <h1>All-in-One Tool Suite</h1>
-    
-    <div class="section password-generator">
-        <h2>Password Generator Tool</h2>
-        <label for="length">Password Length:</label>
-        <input type="number" id="length" value="8" min="4" max="32">
-        <button onclick="generatePassword()">Generate Password</button>
-        <div id="password" class="output"></div>
-    </div>
-    
-    <div class="section bin-generator">
-        <h2>BIN Generator Tool</h2>
-        <button onclick="generateBIN()">Generate BIN</button>
-        <div id="bin" class="output"></div>
-    </div>
-    
-    <div class="section qr-code-generator">
-        <h2>Link to QR Code Generator</h2>
-        <input type="text" id="url" placeholder="Enter your URL here">
-        <button onclick="generateQRCode()">Generate QR Code</button>
-        <div id="qrcode" class="output"></div>
-    </div>
-
-    <!-- Include the qrcode.min.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-    <script>
-        function generatePassword() {
-            const length = document.getElementById('length').value;
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-            let password = '';
-            for (let i = 0; i < length; i++) {
-                password += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            document.getElementById('password').innerHTML = `Your Password: ${password}`;
-        }
-
-        function generateBIN() {
-            const bin = Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('bin').innerHTML = `Generated BIN: ${bin}`;
-        }
-
-        function generateQRCode() {
-            const url = document.getElementById('url').value;
-            if (url) {
-                document.getElementById('qrcode').innerHTML = "";
-                const qr = qrcode(0, 'L');
-                qr.addData(url);
-                qr.make();
-                document.getElementById('qrcode').innerHTML = qr.createImgTag();
-            } else {
-                alert("Please enter a valid URL");
-            }
-        }
-    </script>
-</body>
-</html>
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All-in-One Tool Suite</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        input[type="color"], input[type="text"], button {
-            padding: 10px;
-            margin-top: 10px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .section {
-            margin-bottom: 40px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
-        }
         .hex-color-tool {
             border: 1px solid #FF5722;
             background-color: #fff3e0;
@@ -254,34 +101,82 @@
             border: 1px solid #2196F3;
             background-color: #f0faff;
         }
-        #colorDisplay, #ipInfo, #output {
-            margin-top: 20px;
-            font-size: 18px;
+        .jpg-to-zip-tool {
+            border: 1px solid #4CAF50;
+            background-color: #f9fff9;
         }
-        #hexCode, #editor {
-            font-weight: bold;
-            margin-top: 10px;
+        .ip-tool {
+            border: 1px solid #FF9800;
+            background-color: #fff8f0;
         }
-        #copyButton {
-            display: none;
-            padding: 8px;
-            margin-top: 10px;
+        .url-generator-tool {
+            border: 1px solid #2196F3;
+            background-color: #f0faff;
         }
-        #editor {
-            height: 300px;
-            width: 100%;
-            border: 1px solid #ccc;
+        .word-tracker-tool {
+            border: 1px solid #4CAF50;
+            background-color: #e8f5e9;
         }
-        #iframe {
-            width: 100%;
-            height: 300px;
-            margin-top: 20px;
+        .keyword-finder-tool {
+            border: 1px solid #FF9800;
+            background-color: #fff3e0;
+        }
+        .photo-editor-tool {
+            border: 1px solid #2196F3;
+            background-color: #e3f2fd;
         }
     </style>
 </head>
 <body>
-    <h1>All-in-One Tool Suite</h1>
-    
+    <h1>All-in-One Utility Suite</h1>
+
+    <!-- Fake Info Generator -->
+    <div class="section fake-info">
+        <h2>Fake Info Generator</h2>
+        <button onclick="generateFakeInfo()">Generate Info</button>
+        <div id="fakeInfo" class="output"></div>
+    </div>
+
+    <!-- Birthday Wish Generator -->
+    <div class="section birthday-wish">
+        <h2>Birthday Wish Generator</h2>
+        <input type="date" id="birthdate">
+        <button onclick="generateBirthdayWish()">Generate Wish</button>
+        <div id="birthdayWish" class="output"></div>
+    </div>
+
+    <!-- Age Calculator Tool -->
+    <div class="section age-calculator">
+        <h2>Age Calculator Tool</h2>
+        <input type="date" id="dob">
+        <button onclick="calculateAge()">Calculate Age</button>
+        <div id="age" class="output"></div>
+    </div>
+
+    <!-- Password Generator Tool -->
+    <div class="section password-generator">
+        <h2>Password Generator Tool</h2>
+        <label for="length">Password Length:</label>
+        <input type="number" id="length" value="8" min="4" max="32">
+        <button onclick="generatePassword()">Generate Password</button>
+        <div id="password" class="output"></div>
+    </div>
+
+    <!-- BIN Generator Tool -->
+    <div class="section bin-generator">
+        <h2>BIN Generator Tool</h2>
+        <button onclick="generateBIN()">Generate BIN</button>
+        <div id="bin" class="output"></div>
+    </div>
+
+    <!-- QR Code Generator -->
+    <div class="section qr-code-generator">
+        <h2>QR Code Generator</h2>
+        <input type="text" id="url" placeholder="Enter your URL here">
+        <button onclick="generateQRCode()">Generate QR Code</button>
+        <div id="qrcode" class="output"></div>
+    </div>
+
     <!-- Hex Color Tool -->
     <div class="section hex-color-tool">
         <h2>Hex Colors Code Tool</h2>
@@ -297,7 +192,6 @@
     <div class="section code-editor-tool">
         <h2>Best Code Editor Tool</h2>
         <div id="editor"> 
-            <!-- Default HTML code -->
             <h1>Hello, World!</h1>
             <p>This is a simple HTML code editor.</p>
         </div>
@@ -313,117 +207,6 @@
         <div id="ipInfo"></div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
-    <script>
-        // Hex Color Tool
-        function showHexCode() {
-            const color = document.getElementById('colorPicker').value;
-            const hexCodeElement = document.getElementById('hexCode');
-            hexCodeElement.innerText = `HEX Code: ${color}`;
-            document.getElementById('copyButton').style.display = 'block';
-        }
-
-        function copyHexCode() {
-            const hexCode = document.getElementById('hexCode').innerText.replace('HEX Code: ', '');
-            navigator.clipboard.writeText(hexCode).then(() => {
-                alert("HEX Code copied to clipboard!");
-            });
-        }
-
-        // Code Editor Tool
-        const editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.session.setMode("ace/mode/html");
-
-        function runCode() {
-            const code = editor.getValue();
-            const iframe = document.getElementById('output');
-            iframe.contentDocument.open();
-            iframe.contentDocument.write(code);
-            iframe.contentDocument.close();
-        }
-
-        // IP Search Tool
-        function searchIP() {
-            const ip = document.getElementById('ipInput').value;
-            const apiKey = 'YOUR_API_KEY'; // Replace with your actual IPinfo API Key
-            
-            if (ip) {
-                fetch(`https://ipinfo.io/${ip}/json?token=${apiKey}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        displayIPInfo(data);
-                    })
-                    .catch(error => {
-                        alert("Failed to fetch IP information. Please check the IP address and try again.");
-                    });
-            } else {
-                alert("Please enter a valid IP address");
-            }
-        }
-
-        function displayIPInfo(data) {
-            const ipInfoDiv = document.getElementById('ipInfo');
-            ipInfoDiv.innerHTML = `
-                <p><strong>IP:</strong> ${data.ip}</p>
-                <p><strong>City:</strong> ${data.city}</p>
-                <p><strong>Region:</strong> ${data.region}</p>
-                <p><strong>Country:</strong> ${data.country}</p>
-                <p><strong>Location:</strong> ${data.loc}</p>
-                <p><strong>Organization:</strong> ${data.org}</p>
-            `;
-        }
-    </script>
-</body>
-</html>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All-in-One Utility Suite</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        input[type="file"], button {
-            padding: 10px;
-            margin-top: 10px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .section {
-            margin-bottom: 40px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
-        }
-        .jpg-to-zip-tool {
-            border: 1px solid #4CAF50;
-            background-color: #f9fff9;
-        }
-        .ip-tool {
-            border: 1px solid #FF9800;
-            background-color: #fff8f0;
-        }
-        .url-generator-tool {
-            border: 1px solid #2196F3;
-            background-color: #f0faff;
-        }
-        #downloadLink, #ipDisplay, #urlDisplay {
-            margin-top: 20px;
-            font-size: 16px;
-        }
-    </style>
-</head>
-<body>
-    <h1>All-in-One Utility Suite</h1>
-    
     <!-- JPG to ZIP Tool -->
     <div class="section jpg-to-zip-tool">
         <h2>JPG to ZIP Tool</h2>
@@ -447,166 +230,6 @@
         <div id="urlDisplay"></div>
     </div>
 
-    <!-- Include JSZip and JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
-    <script>
-        // JPG to ZIP Tool
-        function convertToZip() {
-            const files = document.getElementById('fileInput').files;
-            const zip = new JSZip();
-            const folder = zip.folder("images");
-
-            if (files.length > 0) {
-                Array.from(files).forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        folder.file(file.name, e.target.result.split(',')[1], {base64: true});
-                    };
-                    reader.readAsDataURL(file);
-                });
-
-                setTimeout(() => {
-                    zip.generateAsync({type: "blob"}).then(function(content) {
-                        const downloadLink = document.createElement("a");
-                        downloadLink.href = URL.createObjectURL(content);
-                        downloadLink.download = "images.zip";
-                        downloadLink.innerText = "Download ZIP";
-                        document.getElementById("downloadLink").appendChild(downloadLink);
-                    });
-                }, 1000);
-            } else {
-                alert("Please select JPG files to convert");
-            }
-        }
-
-        // What is My IP Tool
-        function getMyIP() {
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('ipDisplay').innerText = `Your IP Address: ${data.ip}`;
-                })
-                .catch(error => {
-                    alert("Failed to fetch IP address. Please try again.");
-                });
-        }
-
-        // Photo to Real URL Generator
-        function uploadPhoto() {
-            const photo = document.getElementById('photoInput').files[0];
-            if (photo) {
-                const formData = new FormData();
-                formData.append('image', photo);
-
-                fetch('https://api.imgbb.com/1/upload?key=YOUR_API_KEY', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const url = data.data.url;
-                    document.getElementById('urlDisplay').innerHTML = `Uploaded Image URL: <a href="${url}" target="_blank">${url}</a>`;
-                })
-                .catch(error => {
-                    alert("Failed to upload image. Please try again.");
-                });
-            } else {
-                alert("Please select an image to upload");
-            }
-        }
-    </script>
-</body>
-</html>
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All-in-One Utility Suite</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f9f9f9;
-        }
-
-        .section {
-            margin-bottom: 40px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
-
-        textarea, input[type="text"], input[type="file"], button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            height: 150px;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        #result, #keywords {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-
-        #canvas {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            display: block;
-        }
-
-        #controls button {
-            width: 32%;
-            margin-right: 2%;
-            margin-bottom: 10px;
-        }
-        
-        #controls button:last-child {
-            margin-right: 0;
-        }
-
-        .word-tracker-tool {
-            border: 1px solid #4CAF50;
-            background-color: #e8f5e9;
-        }
-
-        .keyword-finder-tool {
-            border: 1px solid #FF9800;
-            background-color: #fff3e0;
-        }
-
-        .photo-editor-tool {
-            border: 1px solid #2196F3;
-            background-color: #e3f2fd;
-        }
-
-        #downloadBtn {
-            margin-top: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <h1>All-in-One Utility Suite</h1>
-
     <!-- Word Tracker Tool -->
     <div class="section word-tracker-tool">
         <h2>Word Tracker Tool</h2>
@@ -627,7 +250,7 @@
     <!-- Photo Editor Tool -->
     <div class="section photo-editor-tool">
         <h2>Photo Editor Tool</h2>
-        <input type="file" id="photoInput" accept="image/*">
+        <input type="file" id="photoInput2" accept="image/*">
         <canvas id="canvas"></canvas>
         <div id="controls">
             <button onclick="applyFilter('grayscale')">Grayscale</button>
@@ -640,9 +263,229 @@
         <button id="downloadBtn" onclick="downloadImage()">Download Image</button>
     </div>
 
-    <!-- JavaScript -->
+    <!-- Include external libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+
     <script>
-        // Word Tracker Tool
+        // JavaScript functions for each of the tools
+
+        // 1. Fake Info Generator
+        const names = ["John Doe", "Jane Smith", "Michael Brown", "Alice Johnson"];
+        const addresses = ["123 Main St, Springfield", "456 Elm St, Metropolis", "789 Oak St, Gotham", "101 Maple Ave, Star City"];
+
+        function generateFakeInfo() {
+            const name = names[Math.floor(Math.random() * names.length)];
+            const address = addresses[Math.floor(Math.random() * addresses.length)];
+            const info = `Name: ${name}<br>Address: ${address}`;
+            document.getElementById('fakeInfo').innerHTML = info;
+        }
+
+        // 2. Birthday Wish Generator
+        function generateBirthdayWish() {
+            const birthdateInput = document.getElementById('birthdate').value;
+            if (!birthdateInput) {
+                document.getElementById('birthdayWish').innerText = "Please select a birthdate.";
+                return;
+            }
+            const birthdate = new Date(birthdateInput);
+            const today = new Date();
+            let age = today.getFullYear() - birthdate.getFullYear();
+            const m = today.getMonth() - birthdate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+                age--;
+            }
+            const message = `Happy Birthday! You are ${age} years old today.`;
+            document.getElementById('birthdayWish').innerHTML = message;
+        }
+
+        // 3. Age Calculator Tool
+        function calculateAge() {
+            const dobInput = document.getElementById('dob').value;
+            if (!dobInput) {
+                document.getElementById('age').innerText = "Please select a date of birth.";
+                return;
+            }
+            const dob = new Date(dobInput);
+            const diff = Date.now() - dob.getTime();
+            const ageDate = new Date(diff);
+            const year = ageDate.getUTCFullYear() - 1970;
+            document.getElementById('age').innerHTML = `You are ${year} years old.`;
+        }
+
+        // 4. Password Generator Tool
+        function generatePassword() {
+            const length = document.getElementById('length').value;
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('password').innerHTML = `Your Password: ${password}`;
+        }
+
+        // 5. BIN Generator Tool
+        function generateBIN() {
+            const bin = Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('bin').innerHTML = `Generated BIN: ${bin}`;
+        }
+
+        // 6. QR Code Generator
+        function generateQRCode() {
+            const url = document.getElementById('url').value;
+            if (url) {
+                document.getElementById('qrcode').innerHTML = "";
+                const qr = qrcode(0, 'L');
+                qr.addData(url);
+                qr.make();
+                document.getElementById('qrcode').innerHTML = qr.createImgTag();
+            } else {
+                alert("Please enter a valid URL");
+            }
+        }
+
+        // 7. Hex Color Tool
+        function showHexCode() {
+            const color = document.getElementById('colorPicker').value;
+            const hexCodeElement = document.getElementById('hexCode');
+            hexCodeElement.innerText = `HEX Code: ${color}`;
+            document.getElementById('copyButton').style.display = 'block';
+        }
+
+        function copyHexCode() {
+            const hexCode = document.getElementById('hexCode').innerText.replace('HEX Code: ', '');
+            navigator.clipboard.writeText(hexCode).then(() => {
+                alert("HEX Code copied to clipboard!");
+            });
+        }
+
+        // 8. Code Editor Tool
+        const editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/html");
+
+        function runCode() {
+            const code = editor.getValue();
+            const iframe = document.getElementById('output');
+            iframe.contentDocument.open();
+            iframe.contentDocument.write(code);
+            iframe.contentDocument.close();
+        }
+
+        // 9. IP Search Tool
+        function searchIP() {
+            const ip = document.getElementById('ipInput').value;
+            if (ip) {
+                fetch(`https://ipinfo.io/${ip}/json?token=YOUR_API_KEY`) // Replace YOUR_API_KEY with a valid IPinfo API key
+                    .then(response => response.json())
+                    .then(data => {
+                        displayIPInfo(data);
+                    })
+                    .catch(error => {
+                        alert("Failed to fetch IP information. Please check the IP address and try again.");
+                    });
+            } else {
+                alert("Please enter a valid IP address");
+            }
+        }
+
+        function displayIPInfo(data) {
+            const ipInfoDiv = document.getElementById('ipInfo');
+            ipInfoDiv.innerHTML = `
+                <p><strong>IP:</strong> ${data.ip}</p>
+                <p><strong>City:</strong> ${data.city}</p>
+                <p><strong>Region:</strong> ${data.region}</p>
+                <p><strong>Country:</strong> ${data.country}</p>
+                <p><strong>Location:</strong> ${data.loc}</p>
+                <p><strong>Organization:</strong> ${data.org}</p>
+            `;
+        }
+
+        // 10. JPG to ZIP Tool
+        function convertToZip() {
+            const files = document.getElementById('fileInput').files;
+            const zip = new JSZip();
+            const folder = zip.folder("images");
+
+            if (files.length > 0) {
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        folder.file(file.name, e.target.result.split(',')
+  <button className="select-none no-underline">
+  <a className="" href="" target="_blank">
+        <span className="relative -top-[0rem] inline-flex">
+          <span className="h-[1rem] min-w-[1rem] items-center justify-center rounded-full  text-center px-1 text-xs font-mono bg-muted text-[0.60rem] text-muted-foreground">
+            1
+          </span>
+        </span>
+      </a>
+    </button>, {base64: true});
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                setTimeout(() => {
+                    zip.generateAsync({type: "blob"}).then(function(content) {
+                        const downloadLink = document.createElement("a");
+                        downloadLink.href = URL.createObjectURL(content);
+                        downloadLink.download = "images.zip";
+                        downloadLink.innerText = "Download ZIP";
+                        document.getElementById("downloadLink").appendChild(downloadLink);
+                    });
+                }, 1000);
+            } else {
+                alert("Please select JPG files to convert");
+            }
+        }
+
+        // 11. What is My IP Tool
+        function getMyIP() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ipDisplay').innerText = `Your IP Address: ${data.ip}`;
+                })
+                .catch(error => {
+                    alert("Failed to fetch IP address. Please try again.");
+                });
+        }
+
+        // 12. Photo to Real URL Generator
+        function uploadPhoto() {
+            const photo = document.getElementById('photoInput').files
+  <button className="select-none no-underline">
+  <a className="" href="" target="_blank">
+        <span className="relative -top-[0rem] inline-flex">
+          <span className="h-[1rem] min-w-[1rem] items-center justify-center rounded-full  text-center px-1 text-xs font-mono bg-muted text-[0.60rem] text-muted-foreground">
+            0
+          </span>
+        </span>
+      </a>
+    </button>;
+            if (photo) {
+                const formData = new FormData();
+                formData.append('image', photo);
+
+                fetch('https://api.imgbb.com/1/upload?key=YOUR_API_KEY', { // Replace YOUR_API_KEY with your actual API key
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const url = data.data.url;
+                    document.getElementById('urlDisplay').innerHTML = `Uploaded Image URL: <a href="${url}" target="_blank">${url}</a>`;
+                })
+                .catch(error => {
+                    alert("Failed to upload image. Please try again.");
+                });
+            } else {
+                alert("Please select an image to upload");
+            }
+        }
+
+        // 13. Word Tracker Tool
         function trackWord() {
             const text = document.getElementById('textInput').value;
             const word = document.getElementById('wordInput').value.trim().toLowerCase();
@@ -657,7 +500,7 @@
             }
         }
 
-        // Keyword Finder Tool
+        // 14. Keyword Finder Tool
         function findKeywords() {
             const url = document.getElementById('urlInput').value.trim();
 
@@ -676,12 +519,12 @@
             }
         }
 
-        // Photo Editor Tool
+        // 15. Photo Editor Tool
         let canvas = document.getElementById('canvas');
         let ctx = canvas.getContext('2d');
         let img = new Image();
 
-        document.getElementById('photoInput').addEventListener('change', function(e) {
+        document.getElementById('photoInput2').addEventListener('change', function(e) {
             let reader = new FileReader();
             reader.onload = function(event) {
                 img.onload = function() {
@@ -691,7 +534,16 @@
                 }
                 img.src = event.target.result;
             }
-            reader.readAsDataURL(e.target.files[0]);
+            reader.readAsDataURL(e.target.files
+  <button className="select-none no-underline">
+  <a className="" href="" target="_blank">
+        <span className="relative -top-[0rem] inline-flex">
+          <span className="h-[1rem] min-w-[1rem] items-center justify-center rounded-full  text-center px-1 text-xs font-mono bg-muted text-[0.60rem] text-muted-foreground">
+            0
+          </span>
+        </span>
+      </a>
+    </button>);
         });
 
         function applyFilter(filter) {
@@ -716,3 +568,4 @@
     </script>
 </body>
 </html>
+
